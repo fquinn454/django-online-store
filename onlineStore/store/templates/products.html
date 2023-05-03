@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="products-container">
+  {% for product in products %}
+    <div class="product">
+        <img class="thumbnail" src= '{{ product.thumbnail }} '>
+        <p class="description"><strong>{{ product.title }}</strong></p>
+        <p class="price">Price £{{product.price}}</p>
+        <button class="buy-btn">Add to Cart</button>
+    </div> 
+  {% endfor %}
+{% endblock %}

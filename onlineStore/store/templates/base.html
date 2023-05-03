@@ -1,0 +1,88 @@
+{% load static %}
+{# Load the tag library #}
+{% load bootstrap5 %}
+{% load icons %}
+
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Awesome CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+    crossorigin="anonymous"
+    >
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+
+    <link href="{% static 'reset.css' %}" rel="stylesheet" >
+    <link href="{% static 'store.css' %}" rel="stylesheet" >
+
+    <title>{% block title %} {% endblock %}</title>
+  </head>
+  <body>
+    {% block nav %}
+        <nav class="nav-bar" >
+          <img class="logo" src="{% static '/images/logo.png' %}" />
+          <div class="nav-container">
+            <ul class="nav left" id="nav-bar">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'index' %}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'products' %}">Products</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="#">Sale</a>
+              </li>
+            </ul>
+            <ul class="nav right"> 
+              <li class="nav-item">
+                <a class="nav-link " href="#">{% icon 'user' %}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="#">{% icon 'heart' %}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">{% icon 'cart' %}</a>
+              </li>
+            </ul>
+          </div>
+          <div class="nav-hamburger">
+
+            <div class="dropdown">
+              <button class="btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link">{% icon 'bars' %}</a></button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="{% url 'index' %}">Home</a></li>
+                <li><a class="dropdown-item" href="{% url 'products' %}">Products</a></li>
+                <li><a class="dropdown-item" href="#">Sale</a></li>
+                <li><a class="dropdown-item" href="#">Account</a></li>
+                <li><a class="dropdown-item" href="#">Favourites</a></li>
+                <li><a class="dropdown-item" href="#">Trolley</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+    {% endblock nav %}
+
+    {% block content %}
+
+    {% endblock content %}
+
+    {% block footer %}
+
+    {% endblock footer %}
+  </body>
+</html>
