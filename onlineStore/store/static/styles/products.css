@@ -1,4 +1,4 @@
-/* products.html*/
+/* Contains CSS Rules for elements in products.html*/
 .product {
     display: flex;
     flex-direction: column;

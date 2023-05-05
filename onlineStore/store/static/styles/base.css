@@ -1,4 +1,4 @@
-/* Contains CSS Rules for the Nav Bar and Footer that appear on all pages */
+/* Contains CSS Rules for the Nav Bar and Footer elements in base.html*/
 
 body{
     /* Need to find the way to overide Bootstrap font-family variables */

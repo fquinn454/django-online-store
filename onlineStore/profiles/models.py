@@ -10,6 +10,12 @@ class Profile(models.Model):
     cart = models.ManyToManyField(Product, related_name='cart', blank=True)
     favourites = models.ManyToManyField(Product, related_name='favourites', blank=True)
 
+    class Meta:
+        ordering = ["id"]
+
+    def __str__(self):
+        return self.user.username
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:

@@ -1,0 +1,70 @@
+/* Contains CSS Rules for elements in register.html*/
+.background-container{
+    background-image: url('../images/tech.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:center;
+    height: 100%;   
+}
+
+.form-container{
+    display: flex;
+    justify-content: center;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top:3%;
+    padding: 2%;
+    background-color: white;
+    border-radius: 4px;
+    color:hsl(216, 89%, 26%);
+    width: 40%;
+}
+
+input, label{
+    display: block;
+    width: 100%;
+    margin-bottom: 1%; 
+}
+
+h2{
+    margin-bottom: 4%;
+}
+
+
+.submit-btn{
+    font-size: large;
+    background-color: #07377d;
+    color:#e3dbdb;
+    border: solid #07377d 1px;
+    border-radius: 4px;
+    margin:5% 0; 
+    line-height: 2;
+    width: 100%;
+}
+
+.submit-btn:hover{
+    background-color:#e3dbdb;
+    color: #07377d;
+    border: solid #07377d 1px;
+    transition: background-color 0.3s, color 0.3s, border 0.3s;
+}
+
+span.helptext, .form-group li{
+    display: none;
+}
+
+@media screen and (max-width: 800px){
+    .form-group{
+        width:70%;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .form-group{
+        width:100%;
+    }
+}

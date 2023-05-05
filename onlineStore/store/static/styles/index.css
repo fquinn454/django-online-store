@@ -1,5 +1,5 @@
 
-/* Contains CSS Rules for the items specific to the homepage */
+/* Contains CSS Rules for elements in index.html*/
 .hero{
     background-image: url('../images/tech.jpg');
     background-size: cover;
@@ -57,17 +57,26 @@ div.intro p{
 
     .intro-container{
         width:50%;
-        align-self: center;
-        margin: 0 auto;
+        height:40%;
+        margin: 15% auto;
         float:none;
-
     }
 
     div.intro{
         background-color: #fff;
         border-radius: 4px;
-        top: 200px;
-        border: solid 2px #736d6d;
+        text-align: center;
+        font-size: medium;
+    }
+
+    div.intro p{
+        font-size: medium;
+    }
+
+    .enter{
+        width: 80%;
+        margin: 5% auto;
+        font-size: medium;
     }
 }
 
