@@ -40,15 +40,17 @@ INSTALLED_APPS = [
     'bootstrap5',
     'django_icons',
     'store',
+    'profiles',
 ]
 
 DJANGO_ICONS = {
     "ICONS": {
         "user": {"name": "fa fa-user fa-2x"},
         "heart" : {"name": "fa fa-heart fa-2x"},
+        "heart-small" : {"name": "fa fa-heart"},
         "cart" : {"name": "fa fa-shopping-cart fa-2x"},
         "carrat": {"name" : "fa fa-caret-down"},
-        "bars": {"name": "fa fa-solid fa-bars"}
+        "bars": {"name": "fa fa-solid fa-bars fa-2x"}
     },
 }
 
@@ -60,6 +62,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
 ]
 
 ROOT_URLCONF = 'onlineStore.urls'

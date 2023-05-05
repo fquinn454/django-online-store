@@ -1,13 +1,23 @@
 {% extends 'base.html' %}
+{% load static%}
+{% load icons %}
+
+{% block css %}
+  <link href="{% static 'styles/base.css' %}" rel="stylesheet" >
+  <link href="{% static 'styles/products.css' %}" rel="stylesheet" >
+{% endblock %}
 
 {% block content %}
   <div class="products-container">
   {% for product in products %}
     <div class="product">
-        <img class="thumbnail" src= '{{ product.thumbnail }} '>
+        <a href="{% url 'showProduct' product_id=product.id %}"><img class="thumbnail" style="height:120px; width:180px;" src= '{{ product.thumbnail }} '></a>
         <p class="description"><strong>{{ product.title }}</strong></p>
-        <p class="price">Price £{{product.price}}</p>
-        <button class="buy-btn">Add to Cart</button>
+        <p class="price">Price £{{ product.price }}</p>
+        <div class="btn-toolbar">
+          <button class="buy-btn">Add to Cart</button>
+          <button class="favourite-btn">{% icon 'heart-small' %}</button>
+        </div>
     </div> 
   {% endfor %}
 {% endblock %}

@@ -1,0 +1,78 @@
+/* Contains CSS Rules for the Nav Bar and Footer that appear on all pages */
+
+body{
+    /* Need to find the way to overide Bootstrap font-family variables */
+    font-family: 'Noto Sans', sans-serif !important;
+}
+
+/* Nav */
+.nav-bar{
+    display: flex;
+    background-color:#e7e5f7;
+    align-items: center;
+    font-size: larger;
+}
+
+.nav-link {
+    color:#07377d;
+    margin-right:20px;
+
+}
+
+.nav-link:hover{
+    color:#736d6d;
+    text-decoration-color: #736d6d;
+}
+
+a.active{
+    color:#736d6d;
+    text-decoration: underline;
+    text-decoration-color: #736d6d;
+}
+
+label{
+    color:#07377d;
+   font-size: medium;
+}
+
+.logo{
+    min-width: 100px;
+    max-width: 15%;
+    height: auto;
+}
+
+.nav-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-right:10px;
+}
+
+.nav-hamburger{
+    display: none;
+}
+
+/* Hamburger Navigation Menu on smaller screens*/
+@media screen and (max-width: 700px){
+
+    .nav-hamburger{
+        display: flex;
+        width: 100%;
+        margin-right: 10px;
+        justify-content: flex-end;
+        list-style: none;
+    }
+
+    .nav-link{
+        list-style: none;
+    }
+
+    .nav-container{
+        display: none;
+    }
+
+    .dropdown-menu{
+        background-color: #e7e5f7;
+        color: #07377d;
+    }
+}

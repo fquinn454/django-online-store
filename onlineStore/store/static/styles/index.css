@@ -1,0 +1,75 @@
+
+/* Contains CSS Rules for the items specific to the homepage */
+.hero{
+    background-image: url('../images/tech.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:center;
+    height:95%;
+    width:auto;
+}
+
+.intro-container{
+    margin-top:5rem;
+    margin-right:5rem;
+    float: right;
+    width: 20%;
+}
+
+.intro{
+    display: flex;
+    flex-direction: column;
+    align-content: flex-end;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    background-color: transparent;
+    color: #07377d;
+    top:2rem;
+    padding:2%; 
+}
+
+.enter{
+    text-decoration: none;
+    text-align: center;
+    font-size: large;
+    background-color: #07377d;
+    color:#e3dbdb;
+    border-radius: 4px;
+    margin:10% 2%; 
+    line-height: 2;
+}
+
+.enter:hover{
+    background-color:#e3dbdb;
+    color: #07377d;
+    border: solid #07377d 1px;
+    transition: background-color 0.8s, color 0.8s, border 0.8s;
+}
+
+div.intro p{
+    font-size: larger;
+}
+
+@media screen and (max-width: 1300px){
+    .hero{
+        display: grid;
+    }
+
+    .intro-container{
+        width:50%;
+        align-self: center;
+        margin: 0 auto;
+        float:none;
+
+    }
+
+    div.intro{
+        background-color: #fff;
+        border-radius: 4px;
+        top: 200px;
+        border: solid 2px #736d6d;
+    }
+}
+
+
+

@@ -1,12 +1,17 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link href="{% static 'styles/base.css' %}" rel="stylesheet" >
+    <link href="{% static 'styles/index.css' %}" rel="stylesheet">
+{% endblock %}
 
 {% block content %}
     <div class="hero">
         <div class="intro-container">
             <div class="intro">
                 <div>                
-                    <p>Relax and get the best deals on mobile phones and laptops</p><br>
-                    <p>Shop for tech from the comfort of home.</p>
+                    <p> Get the best deals on mobile phones and laptops from the comfort of home </p>
                 </div>
                 <a class="enter btn" href="{% url 'products' %}">Shop&nbsp;Now</a>
             </div>

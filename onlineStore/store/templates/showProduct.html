@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load icons %}
+
+
+{% block css %}
+    <link href="{% static 'styles/base.css' %}" rel="stylesheet" >
+    <link href="{% static 'styles/showProduct.css' %}" rel="stylesheet" >
+{% endblock %}
+
+{% block content %}
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'products' %}">Products</a></li>
+      <li class="breadcrumb-item active" aria-current="{ product.title }">{{ product.title }}</li>
+    </ol>
+  </nav>
+    <div class="full-product-container">
+        <div id="product-corousel" class="carousel slide" data-bs-ride="true">
+            <div class="carousel-indicators">
+            {% for image in images %}
+                {% if forloop.counter0 == 0 %}
+                    <button type="button" data-bs-target="#product-corousel" data-bs-slide-to={{forloop.counter0}} class="active" aria-current="true" aria-label="Slide {{forloop.counter}}"></button>
+                {% else %}
+                    <button type="button" data-bs-target="#product-corousel" data-bs-slide-to={{forloop.counter0}} aria-label="Slide {{forloop.counter}}"></button>
+                {% endif %}
+            {% endfor %}
+            </div>
+            <div class="carousel-inner">
+                {% for image in images %}
+                    {% if forloop.counter0 == 0 %}
+                        <div class="carousel-item active">
+                            <img src="{{ image.link }}" class="d-block w-75" alt="{{ product.title }}">
+                        </div>
+                    {% else %}
+                        <div class="carousel-item">
+                            <img src="{{ image.link }}" class="d-block w-75" alt="{{ product.title }}">
+                      </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#product-corousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#product-corousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <div class="product-info">
+            <h2>{{ product.title }}</h2>
+            <br>
+            <p>{{ product.description }}</p>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <p class="price">Price £{{ product.price }}</p>
+            <br>
+            <div class="btn-toolbar">
+              <button class="buy-btn">Add to Cart</button>
+              <button class="favourite-btn">{% icon 'heart-small' %}</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
