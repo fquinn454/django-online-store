@@ -26,6 +26,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
 
     <link href="{% static 'styles/reset.css' %}" rel="stylesheet" >
+    <script src="{% static 'script.js' %}" defer></script>
     
     {% block css %}
       
@@ -37,13 +38,13 @@
     {% block nav %}
         <nav class="nav-bar" >
           <img class="logo" src="{% static '/images/logo.png' %}" />
-          <div class="nav-container">
+          <div id="nav-container" class="nav-container">
             <ul class="nav left" id="nav-bar">
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'index' %}">Home</a>
+                <a id ="home" class="nav-link" href="{% url 'index' %}">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'products' %}">Products</a>
+                <a id ="products" class="nav-link" href="{% url 'products' %}">Products</a>
               </li>
               <!--
               <li class="nav-item">
@@ -53,15 +54,15 @@
             </ul>
             <ul class="nav right"> 
               <li class="nav-item">
-                <a class="nav-link " href="#">{% icon 'user' %}</a>
+                <a id ="account"class="nav-link " href="#">{% icon 'user' %}</a>
                 <label>Account</label>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="#">{% icon 'heart' %}</a>
-                <label>Favourites</label>
+                <a id ="favourites" class="nav-link " href="#">{% icon 'heart' %}<span id='favourite-counter'class="badge">0</span></a>
+                <label>Wish&nbsp;List</label>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">{% icon 'cart' %}</a>
+                <a id ="cart" class="nav-link" href="#">{% icon 'cart' %}<span id='cart-counter'class="badge">0</span></a>
                 <label>Check&nbsp;Out</label>
               </li>
             </ul>
@@ -75,7 +76,7 @@
                 <li><a class="dropdown-item" href="{% url 'products' %}">Products</a></li>
                 <!--<li><a class="dropdown-item" href="#">Sale</a></li>-->
                 <li><a class="dropdown-item" href="#">Account</a></li>
-                <li><a class="dropdown-item" href="#">Favourites</a></li>
+                <li><a class="dropdown-item" href="#">Wish&nbsp;List</a></li>
                 <li><a class="dropdown-item" href="#">Check&nbsp;Out</a></li>
               </ul>
             </div>
