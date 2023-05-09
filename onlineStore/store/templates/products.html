@@ -15,7 +15,7 @@
         <a href="{% url 'showProduct' product_id=product.id %}" ><strong>{{ product.title }}</strong></a>
         <p class="price">Price £{{ product.price }}</p>
         <div class="btn-toolbar">
-          <button class="buy-btn" onclick="addToCart()">Add to Cart</button>
+          <button class="buy-btn" onclick="addToCart()">Add&nbsp;to&nbsp;Cart</button>
           <button class="favourite-btn" onclick="addFavourite()">{% icon 'heart-small' %}</button>
         </div>
     </div> 

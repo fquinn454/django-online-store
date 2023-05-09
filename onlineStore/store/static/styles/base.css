@@ -16,7 +16,6 @@ body{
 .nav-link {
     color:#07377d;
     margin-right:20px;
-
 }
 
 .nav-link:hover{
@@ -30,9 +29,14 @@ body{
     text-decoration-color: #736d6d;
 }
 
+.right{
+    display: flex;
+    justify-content: center;
+}
+
 label{
     color:#07377d;
-   font-size: medium;
+    font-size: medium;
 }
 
 .logo{

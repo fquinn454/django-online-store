@@ -1,14 +1,4 @@
 /* Contains CSS Rules for elements in products.html*/
-a{
-    color:#07377d;
-    text-align: center;
-    width: 80%;
-}
-
-a:hover{
-    color:#736d6d;
-    text-decoration-color: #736d6d;
-}
 
 .product {
     display: flex;
@@ -20,6 +10,18 @@ a:hover{
     height: 320px;
     margin: 5%;
 }
+
+.product a{
+    color:#07377d;
+    text-align: center;
+    width: 80%;
+}
+
+.product a:hover{
+    color:#736d6d;
+    text-decoration-color: #736d6d;
+}
+
 
 .thumbnail{
     width: 80%;
@@ -35,6 +37,11 @@ a:hover{
 
 }
 
+.btn-toolbar{
+    flex-wrap:nowrap;
+}
+
+
 button.buy-btn, button.favourite-btn {
     color: #111;
     background-color: #e3dbdb;
@@ -46,7 +53,7 @@ button.buy-btn:hover, button.favourite-btn:hover {
 
 }
 
-@media screen and (max-width: 800px){
+@media screen and (max-width: 850px){
     .products-container{
         grid-template-columns: repeat(4, 1fr);
     }
