@@ -60,8 +60,14 @@
             <p class="price">Price £{{ product.price }}</p>
             <br>
             <div class="btn-toolbar">
-              <button onclick="addToCart()" class="buy-btn">Add to Cart</button>
-              <button onclick="addFavourite()" class="favourite-btn">{% icon 'heart-small' %}</button>
+              <form class="btn-toolbar" action="{% url 'addToCart' product_id=product.id %}" method="post">
+                {% csrf_token %}
+                <button class="buy-btn" type="submit">Add&nbsp;To&nbsp;Cart</button>
+              </form>
+              <form class="btn-toolbar" action="{% url 'addFavourite' product_id=product.id %}" method="post">
+                {% csrf_token %}
+                <button class="favourite-btn" type="submit">{% icon 'heart-small' %}</button>
+              </form>
             </div>
         </div>
     </div>

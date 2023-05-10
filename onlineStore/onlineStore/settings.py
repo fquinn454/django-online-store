@@ -50,7 +50,8 @@ DJANGO_ICONS = {
         "heart-small" : {"name": "fa fa-heart"},
         "cart" : {"name": "fa fa-shopping-cart fa-2x"},
         "carrat": {"name" : "fa fa-caret-down"},
-        "bars": {"name": "fa fa-solid fa-bars fa-2x"}
+        "bars": {"name": "fa fa-solid fa-bars fa-2x"},
+        "trash": {"name": "fa fa-trash"}
     },
 }
 
@@ -78,6 +79,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request'
             ],
         },
     },

@@ -10,13 +10,19 @@
 {% block content %}
   <div class="products-container">
   {% for product in products %}
-    <div class="product">
+    <div class="product" id='{{ product.id }}'>
         <a href="{% url 'showProduct' product_id=product.id %}"><img class="thumbnail" style="height:120px; width:180px;" src= '{{ product.thumbnail }} '></a>
         <a href="{% url 'showProduct' product_id=product.id %}" ><strong>{{ product.title }}</strong></a>
         <p class="price">Price £{{ product.price }}</p>
         <div class="btn-toolbar">
-          <button class="buy-btn" onclick="addToCart()">Add&nbsp;to&nbsp;Cart</button>
-          <button class="favourite-btn" onclick="addFavourite()">{% icon 'heart-small' %}</button>
+          <form class="btn-toolbar" action="{% url 'addToCart' product_id=product.id %}" method="post">
+            {% csrf_token %}
+            <button class="buy-btn" type="submit">Add&nbsp;To&nbsp;Cart</button>
+          </form>
+          <form class="btn-toolbar" action="{% url 'addFavourite' product_id=product.id %}" method="post">
+            {% csrf_token %}
+            <button class="favourite-btn" type="submit">{% icon 'heart-small' %}</button>
+          </form>
         </div>
     </div> 
   {% endfor %}

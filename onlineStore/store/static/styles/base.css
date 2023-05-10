@@ -81,6 +81,7 @@ label{
 
     .nav-link{
         list-style: none;
+        margin-right: 0;
     }
 
     .nav-container{

@@ -24,9 +24,18 @@ class Product(models.Model):
     stock = models.IntegerField()
     discount = models.FloatField()
 
+
+
     class Meta:
         ordering = ["id"]
 
     def __str__(self):
         return self.brand + " " +self.title
+    
+    def productsToGet(request):
+        productsToGet = request.session['favourites']
+        products = []
+        for product in productsToGet:
+            products.append(Product.objects.get(pk=product))
+        return products
 
