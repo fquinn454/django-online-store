@@ -1,40 +1,68 @@
-from django.http import HttpResponse, HttpResponseRedirect
+# from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.urls import reverse
-from .models import Product
+from .models import Product, Image
+from profiles.models import Wishlist
+from django.contrib.auth.models import User
 from .utils import *
 
+# HOMEPAGE
+# returns homepage
 def index(request):
     lengths = getSessionVariableLengths(request)
-    products = Product.objects.all()
-    context = {'products': products, 'favouritesLength': lengths[0], 'cartLength': lengths[1]}
+    context = {'favouritesLength': lengths[0], 'cartLength': lengths[1]}
     return render(request, "index.html", context)
 
+# PRODUCTS
+# returns all products in database
 def products(request):
     lengths = getSessionVariableLengths(request)
     products = Product.objects.all()
     context = {'products': products, 'favouritesLength': lengths[0], 'cartLength': lengths[1]}
     return render(request, "products.html", context)
 
+# returns product info for single product 
 def showProduct(request, product_id):
     lengths = getSessionVariableLengths(request)
     product = Product.objects.get(pk=product_id)
-    images = product.images.all()
+    images = Image.objects.filter(product = product_id)
     context = {'product': product, 'images': images,'favouritesLength': lengths[0], 'cartLength': lengths[1] }
     return render(request, "showProduct.html", context)
 
+
+# WISHLIST
+# returns user Wish List 
+def showWishList(request):
+   lengths = getSessionVariableLengths(request)
+   products = Product.productsToGet(request)
+   context = {'products': products, 'favouritesLength': lengths[0], 'cartLength': lengths[1]}
+   return render(request, "showWishList.html", context)
+
+# returns showWishList.html after user adds item to wishlish
 def addFavourite(request, product_id):
     addUserFavourite(request, product_id)
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
+# returns showWishList.html after user deletes a product from wishlish
+def removeWishListItem(request, product_id):
+    removeUserWishListItem(request, product_id)
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+# returns showWishList.html after user deletes all products in wish list
 def delWishList(request):
     deleteUserWishList(request)
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
-def delCart(request):
-    deleteUserCart(request)
-    return redirect(request.META.get('HTTP_REFERER', '/home'))
+"""
+Save a user's wishlist to their account 
+Must be logged in
+"""
 
+def saveWishList(request):
+    Wishlist.wishlist_add(request)
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+# CART
+# returns showCart.html after user add product to cart
 def addToCart(request, product_id):
     cart = request.session.get('cart', [])
     cart.append(product_id)
@@ -42,12 +70,9 @@ def addToCart(request, product_id):
     request.session.save()
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
-def showWishList(request):
-   lengths = getSessionVariableLengths(request)
-   products = Product.productsToGet(request)
-   context = {'products': products, 'favouritesLength': lengths[0], 'cartLength': lengths[1]}
-   return render(request, "showWishList.html", context)
-
-def removeWishListItem(request, product_id):
-    removeUserWishListItem(request, product_id)
+# returns showCart.html after user deletes all products in cart
+def delCart(request):
+    deleteUserCart(request)
     return redirect(request.META.get('HTTP_REFERER', '/'))
+
+

@@ -1,5 +1,14 @@
 /* Contains CSS Rules for elements in products.html*/
 
+#products a{
+    color:#736d6d;
+    text-decoration: underline;
+    text-decoration-color: #736d6d;
+    cursor:default;
+    opacity: 0.8;
+}
+
+
 .product {
     display: flex;
     flex-direction: column;

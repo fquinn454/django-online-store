@@ -34,6 +34,10 @@
         {% csrf_token %}
         <button class="clear-btn" type="submit">Clear&nbsp;Wish&nbsp;List</button>
     </form>
+    <form action="{% url 'saveWishList' %}" method="post">
+        {% csrf_token %}
+        <button class="clear-btn" type="submit">Save&nbsp;Wish&nbsp;List</button>
+    </form>
   </div>
 
   <div class="products-container-small">
@@ -58,6 +62,10 @@
     <form action="{% url 'deleteWishList' %}" method="post">
         {% csrf_token %}
         <button class="clear-btn" type="submit">Clear&nbsp;Wish&nbsp;List</button>
+    </form>
+    <form action="#" method="post">
+        {% csrf_token %}
+        <button class="clear-btn" type="submit">Save&nbsp;Wish&nbsp;List</button>
     </form>
   </div>
 {% endblock %}
