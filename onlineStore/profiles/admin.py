@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
-from .models import Wishlist
+from .models import Profile
 
-admin.site.register(Wishlist)
+admin.site.register(Profile)
 

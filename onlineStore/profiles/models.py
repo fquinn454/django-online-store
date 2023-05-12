@@ -1,25 +1,31 @@
 from django.db import models
 from django.contrib.auth.models import User
 from store.models import Product
-# from django.contrib.auth.decorators import login_required
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
-# Create your models here.
-class Wishlist(models.Model):
+class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    products = models.ManyToManyField(Product, null=True)
-
-    class Meta:
-        ordering = ["id"]
+    wishlist = models.ManyToManyField(Product, related_name='wishlist', blank=True)
+    cart = models.ManyToManyField(Product, related_name='cart', blank=True)
 
     def __str__(self):
         return self.user.username
     
-    def wishlist_add(request):
-        try:
-            Wishlist.objects.get(id = request.user.id)
-        except:
-            Wishlist.objects.create(user = request.user)
-        
-        for product in request.session.get('favourites', []):
-            request.user.wishlist.products.add(product)
+
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        instance.profile.save()
+
+
+
+
+
+    
+
 

@@ -1,9 +1,13 @@
+from profiles.models import User, Profile
+
 """ 
-Functions in utils.py are used to work with not logged-in 
-user's wishlist and cart. Information about a non-logged in user's
+Functions in utils.py are used to work with a
+user's wishlist and cart. 
+Information about a non-logged in user's
 wish-list and cart is stored in session storage.  
 The user's wishlist is a list of product id numbers.  
 The user's cart is another separate list of product id numbers.
+Information about a logged in user's cart and wishlist is stored in the database
 """
 
 """
@@ -68,3 +72,14 @@ def removeUserWishListItem(request, product_id):
     favourites = list(favourites)
     request.session['favourites'] = favourites
     request.session.save()
+
+
+""" 
+Saves a logged in user's wishlist to the database
+"""
+def wishlist_add(request):
+    user = User.objects.get(username = request.user.username)
+    profile = Profile.objects.get(user = user)
+    products = request.session.get('favourites', [])
+    for product in products:
+        profile.wishlist.add(product)

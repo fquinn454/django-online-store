@@ -1,8 +1,9 @@
 # from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from .models import Product, Image
-from profiles.models import Wishlist
 from django.contrib.auth.models import User
+from profiles.models import Profile
 from .utils import *
 
 # HOMEPAGE
@@ -33,8 +34,12 @@ def showProduct(request, product_id):
 # returns user Wish List 
 def showWishList(request):
    lengths = getSessionVariableLengths(request)
-   products = Product.productsToGet(request)
-   context = {'products': products, 'favouritesLength': lengths[0], 'cartLength': lengths[1]}
+   try:
+    products = Product.productsToGet(request)
+    context = {'products': products, 'favouritesLength': lengths[0], 'cartLength': lengths[1]}
+   except:
+       context = {'products' : [], 'favouritesLength': lengths[0], 'cartLength': lengths[1] }
+   
    return render(request, "showWishList.html", context)
 
 # returns showWishList.html after user adds item to wishlish
@@ -52,13 +57,11 @@ def delWishList(request):
     deleteUserWishList(request)
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
-"""
-Save a user's wishlist to their account 
-Must be logged in
-"""
 
+# Saves a user's wishlist to their account - must be logged in
+@login_required(login_url='/profiles/login')
 def saveWishList(request):
-    Wishlist.wishlist_add(request)
+    wishlist_add(request)
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
 # CART
