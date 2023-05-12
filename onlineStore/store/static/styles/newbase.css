@@ -1,0 +1,106 @@
+/* Contains the common CSS rules for site */
+
+body{
+    /* Need to find the way to overide Bootstrap font-family variables */
+    font-family: 'Noto Sans', sans-serif !important;
+}
+
+h2, a, label, .dropdown-menu {
+    color:#07377d;
+}
+
+.dropdown-menu, .nav-bar {
+    background-color: #e7e5f7;
+}
+
+.logo{
+    min-width: 100px;
+    max-width: 15%;
+    height: auto;
+}
+
+/* Nav */
+nav{
+    display:flex;
+    margin-top: 1%;
+    font-size: 1.5rem;
+}
+
+nav li{
+    list-style: none;
+    margin-right:2%;
+}
+
+nav a{
+    margin-right:2rem;
+}
+
+nav a:hover {
+    color:#736d6d;
+    text-decoration-color: #736d6d;
+}
+
+.nav-links-left{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width:50%;
+}
+
+.nav-links-right{
+    margin-right:1%;
+    display: flex;
+    justify-content: flex-end;
+    width:50%;
+}
+
+.nav-links-right li{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Shows number of items in wishlist and cart*/
+.badge{
+    background-color: #736d6d;
+    font-size: 12px;
+    color: #fff;
+    border-radius: 50%;
+    padding: 2px 5px;
+    position: relative;
+    left: -10px;
+    top: -32px;
+}
+
+/* hamburger icon for navigation menu on small screens */
+.nav-hamburger{
+    display: none;
+}
+
+@media screen and (max-width: 1200px){
+    nav {
+        font-size: 1rem;
+        line-height: 1;
+    }
+
+    .badge{
+        top: -25px;
+    }
+}
+
+/* Hamburger Navigation Menu on smaller screens*/
+@media screen and (max-width: 780px){
+    .nav-hamburger{
+        display:flex;
+        width: 100%;
+        margin-right: 10px;
+        justify-content: flex-end;
+        list-style: none;
+    }
+
+    nav{
+        display: none;
+    }
+
+}

@@ -1,5 +1,17 @@
 /* Contains CSS Rules for elements in products.html*/
 
+button {
+    color: #111;
+    background-color: #e3dbdb;
+    height: 2rem;
+}
+
+button:hover {
+    background-color: #07377d;
+    color: #e3dbdb;
+}
+
+
 #products a{
     color:#736d6d;
     text-decoration: underline;
@@ -8,6 +20,12 @@
     opacity: 0.8;
 }
 
+.products-container{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 20px;
+    margin-right: 1%;
+}
 
 .product {
     display: flex;
@@ -21,16 +39,11 @@
 }
 
 .product a{
-    color:#07377d;
+    display:flex;
+    justify-content: center;
     text-align: center;
     width: 80%;
 }
-
-.product a:hover{
-    color:#736d6d;
-    text-decoration-color: #736d6d;
-}
-
 
 .thumbnail{
     width: 80%;
@@ -38,46 +51,23 @@
     margin-bottom:5%;
 }
 
-.products-container{
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: 20px;
-    margin-right: 1%;
-
-}
-
-.btn-toolbar{
-    flex-wrap:nowrap;
-}
 
 
-button.buy-btn, button.favourite-btn {
-    color: #111;
-    background-color: #e3dbdb;
-}
-
-button.buy-btn:hover, button.favourite-btn:hover {
-    background-color: #07377d;
-    color: #e3dbdb;
-
-}
-
-@media screen and (max-width: 850px){
+@media screen and (max-width: 1000px){
     .products-container{
         grid-template-columns: repeat(4, 1fr);
     }
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 660px){
     .products-container{
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
-@media screen and (max-width: 490px){
+@media screen and (max-width: 500px){
     .products-container{
         grid-template-columns: repeat(2, 1fr);
     }
 }
-
 

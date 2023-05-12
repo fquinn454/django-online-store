@@ -3,7 +3,7 @@
 {% load icons %}
 
 {% block css %}
-  <link href="{% static 'styles/base.css' %}" rel="stylesheet" >
+  <link href="{% static 'styles/newbase.css' %}" rel="stylesheet" >
   <link href="{% static 'styles/products.css' %}" rel="stylesheet" >
 {% endblock %}
 
@@ -12,16 +12,16 @@
   {% for product in products %}
     <div class="product" id='{{ product.id }}'>
         <a href="{% url 'showProduct' product_id=product.id %}"><img class="thumbnail" style="height:120px; width:180px;" src= '{{ product.thumbnail }} '></a>
-        <a href="{% url 'showProduct' product_id=product.id %}" ><strong>{{ product.title }}</strong></a>
+        <a href="{% url 'showProduct' product_id=product.id %}"><strong>{{ product.title }}</strong></a>
         <p class="price">Price £{{ product.price }}</p>
         <div class="btn-toolbar">
-          <form class="btn-toolbar" action="{% url 'addToCart' product_id=product.id %}" method="post">
+          <form action="{% url 'addToCart' product_id=product.id %}" method="post">
             {% csrf_token %}
-            <button class="buy-btn" type="submit">Add&nbsp;To&nbsp;Cart</button>
+            <button type="submit">Add&nbsp;To&nbsp;Cart</button>
           </form>
-          <form class="btn-toolbar" action="{% url 'addFavourite' product_id=product.id %}" method="post">
+          <form action="{% url 'addFavourite' product_id=product.id %}" method="post">
             {% csrf_token %}
-            <button class="favourite-btn" type="submit">{% icon 'heart-small' %}</button>
+            <button type="submit">{% icon 'heart-small' %}</button>
           </form>
         </div>
     </div> 

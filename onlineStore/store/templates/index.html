@@ -2,19 +2,16 @@
 {% load static %}
 
 {% block css %}
-    <link href="{% static 'styles/base.css' %}" rel="stylesheet" >
+    <link href="{% static 'styles/newbase.css' %}" rel="stylesheet" >
     <link href="{% static 'styles/index.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
     <div class="hero">
         <div class="intro-container">
-            <div class="intro">
-                <div>                
-                    <p> Get the best deals on mobile phones and laptops from the comfort of home </p>
-                </div>
-                <a class="enter btn" href="{% url 'products' %}">Shop&nbsp;Now</a>
-            </div>
+            <p> Get the best deals on mobile phones and laptops from the comfort of home </p>
+            <br>
+            <button href="{% url 'products' %}">Shop&nbsp;Now</button>
         </div>
     </div>
 {% endblock content %}
