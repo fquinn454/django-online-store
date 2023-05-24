@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load icons %}
+{# Load the tag library #}
+{% load bootstrap5 %}
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
 
 
 {% block css %}
@@ -9,13 +15,15 @@
 {% endblock %}
 
 {% block content %}
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+<nav class="breadcrumb-nav" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{% url 'products' %}">Products</a></li>
-      <li class="breadcrumb-item active" aria-current="{ product.title }">{{ product.title }}</li>
+        <li class="breadcrumb-item"><a href="{% url 'products' %}">Products</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'getBrand' brand=product.brand %}">{{ product.brand }}</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'getCategory' category=product.category %}">{{ product.category }}</a></li>
+        <li class="breadcrumb-item active"aria-current="{ product.title }">{{ product.title }}</li>
     </ol>
-  </nav>
-    <div class="full-product-container">
+</nav>
+    <div class="product-container">
         <div id="product-corousel" class="carousel slide" data-bs-ride="true">
             <div class="carousel-indicators">
             {% for image in images %}
@@ -40,12 +48,12 @@
                 {% endfor %}
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#product-corousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#product-corousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
             </button>
         </div>
         <div class="product-info">
@@ -59,14 +67,14 @@
             <br>
             <p class="price">Price £{{ product.price }}</p>
             <br>
-            <div class="btn-toolbar">
-              <form class="btn-toolbar" action="{% url 'addToCart' product_id=product.id %}" method="post">
+            <div >
+              <form action="{% url 'addToCart' product_id=product.id %}" method="post">
                 {% csrf_token %}
-                <button class="buy-btn" type="submit">Add&nbsp;To&nbsp;Cart</button>
+                <button type="submit">Add&nbsp;To&nbsp;Cart</button>
               </form>
-              <form class="btn-toolbar" action="{% url 'addFavourite' product_id=product.id %}" method="post">
+              <form action="{% url 'addFavourite' product_id=product.id %}" method="post">
                 {% csrf_token %}
-                <button class="favourite-btn" type="submit">{% icon 'heart-small' %}</button>
+                <button type="submit">{% icon 'heart-small' %}</button>
               </form>
             </div>
         </div>

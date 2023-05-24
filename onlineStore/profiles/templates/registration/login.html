@@ -4,16 +4,19 @@
 {% block css %}
   <link href="{% static 'styles/base.css' %}" rel="stylesheet" >
   <link href="{% static 'styles/register.css' %}" rel="stylesheet">
+  <link href="{% static 'styles/login.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
-
   <div class="form-container">
     <h2>Log In</h2>
+    <br>
+    <a href = "{% url 'register' %}">Don't have an account? Sign up here</a>
     <form method="post" class="form-group">
       {% csrf_token %}
       {{ form.as_p }}
-      <button type="submit">Log In</button>
+      <button type="submit" class="submit-btn">Log In</button>
     </form>
   </div>
 {% endblock %}
+

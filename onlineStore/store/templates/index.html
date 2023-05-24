@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block css %}
-    <link href="{% static 'styles/newbase.css' %}" rel="stylesheet" >
+    <link href="{% static 'styles/base.css' %}" rel="stylesheet" >
     <link href="{% static 'styles/index.css' %}" rel="stylesheet">
 {% endblock %}
 
@@ -11,7 +11,11 @@
         <div class="intro-container">
             <p> Get the best deals on mobile phones and laptops from the comfort of home </p>
             <br>
-            <button href="{% url 'products' %}">Shop&nbsp;Now</button>
+            <form action="{% url 'products' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Shop&nbsp;Now</button>
+            </form>
+            
         </div>
     </div>
 {% endblock content %}

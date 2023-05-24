@@ -33,8 +33,10 @@
     {% endblock %}
 
     <title>{% block title %} {% endblock %}</title>
+
+
   </head>
-  <body>
+  <body style="--bs-body-font-family: 'Noto Sans', sans-serif">
     {% block nav %}
         <nav>
           <img class="logo" src="{% static '/images/logo.png' %}" />
@@ -48,15 +50,15 @@
           </ul>
           <ul class="nav-links-right" > 
             <li id ="account" >
-              <a href="#">{% icon 'user' %}</a>
+              <a href="{% url 'account-info' %}">{% icon 'user' %}</a>
               <label>Account&nbsp;</label>
             </li>
             <li id ="wish-list" >
-              <a href="{% url 'showWishList' %}">{% icon 'heart' %}<span class="badge">{{ favouritesLength }}</span></a>
+              <a href="{% url 'showWishList' %}">{% icon 'heart' %}<span class="badge">{{ wishlistLength }}</span></a>
               <label>Wish&nbsp;List</label>
             </li>
             <li id ="cart">
-              <a href="#">{% icon 'cart' %}<span class="badge">{{ cartLength }}</span></a>
+              <a href="{% url 'showcart' %}">{% icon 'cart' %}<span class="badge">{{ cartLength }}</span></a>
               <label>Check&nbsp;Out</label>
             </li>
           </ul>
@@ -71,9 +73,9 @@
                 <li><a class="dropdown-item" href="{% url 'index' %}">Home</a></li>
                 <li><a class="dropdown-item" href="{% url 'products' %}">Products</a></li>
                 <!--<li><a class="dropdown-item" href="#">Sale</a></li>-->
-                <li><a class="dropdown-item" href="#">Account</a></li>
+                <li><a class="dropdown-item" href="{% url 'account-info' %}">Account</a></li>
                 <li><a class="dropdown-item" href="{% url 'showWishList' %}">Wish&nbsp;List</a></li>
-                <li><a class="dropdown-item" href="#">Check&nbsp;Out</a></li>
+                <li><a class="dropdown-item" href="{% url 'showcart' %}">Check&nbsp;Out</a></li>
               </ul>
             </div>
           </div>

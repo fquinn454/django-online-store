@@ -1,41 +1,15 @@
+/* Contains the common CSS rules for site */
 
 body{
-    /* Need to find the way to overide Bootstrap font-family variables */
-    font-family: 'Noto Sans', sans-serif !important;
+    background-color: white;
 }
 
-/* Nav */
-.nav-bar{
-    display: flex;
-    background-color:#e7e5f7;
-    align-items: center;
-    font-size: larger;
-}
-
-.nav-link {
+h2, h4, p, a, label, .dropdown-menu {
     color:#07377d;
-    margin-right:20px;
 }
 
-.nav-link:hover{
-    color:#736d6d;
-    text-decoration-color: #736d6d;
-}
-
-.disabled {
-    color:#736d6d;
-    text-decoration: underline;
-    text-decoration-color: #736d6d;
-}
-
-.right{
-    display: flex;
-    justify-content: center;
-}
-
-label{
-    color:#07377d;
-    font-size: medium;
+.dropdown-menu, .nav-bar {
+    background-color: #e7e5f7;
 }
 
 .logo{
@@ -44,17 +18,59 @@ label{
     height: auto;
 }
 
-.nav-container{
-    width: 100%;
+button {
+    color:#e3dbdb;
+    background-color: #07377d;
+}
+
+button:hover {
+    background-color:#e3dbdb;
+    color: #07377d;
+}
+
+/* Nav */
+nav {
+    display:flex;
+    font-size: 1.3rem;
+    background-color: #e7e5f7;
+}
+
+nav li{
+    list-style: none;
+    margin-right:2%;
+}
+
+nav a{
+    margin-right:2rem;
+}
+
+nav a:hover {
+    color:#736d6d;
+    text-decoration-color: #736d6d;
+}
+
+.nav-links-left{
     display: flex;
-    justify-content: space-between;
-    padding-right:10px;
+    justify-content: flex-start;
+    align-items: center;
+    width:50%;
 }
 
-.nav-hamburger{
-    display: none;
+.nav-links-right{
+    margin-right:1%;
+    display: flex;
+    justify-content: flex-end;
+    width:50%;
 }
 
+.nav-links-right li{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Shows number of items in wishlist and cart*/
 .badge{
     background-color: #736d6d;
     font-size: 12px;
@@ -63,32 +79,39 @@ label{
     padding: 2px 5px;
     position: relative;
     left: -10px;
-    top: -25px;
-    opacity: 0.9;
+    top: -32px;
+}
+
+/* hamburger icon for navigation menu on small screens */
+.nav-hamburger{
+    display: none;
+}
+
+@media screen and (max-width: 1200px){
+    nav {
+        font-size: 1.1rem;
+        line-height: 1;
+    }
+
+    .badge{
+        top: -25px;
+    }
 }
 
 /* Hamburger Navigation Menu on smaller screens*/
-@media screen and (max-width: 700px){
-
+@media screen and (max-width: 780px){
     .nav-hamburger{
-        display: flex;
+        display:flex;
+        background-color: #e7e5f7;
         width: 100%;
         margin-right: 10px;
+        padding-bottom: 4%;
         justify-content: flex-end;
         list-style: none;
     }
 
-    .nav-link{
-        list-style: none;
-        margin-right: 0;
-    }
-
-    .nav-container{
+    nav{
         display: none;
     }
 
-    .dropdown-menu{
-        background-color: #e7e5f7;
-        color: #07377d;
-    }
 }

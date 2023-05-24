@@ -1,0 +1,74 @@
+#account a, #account label{
+    color:#736d6d;
+    text-decoration: underline;
+    text-decoration-color: #736d6d;
+    cursor:default;
+    margin-bottom:3%;
+    opacity: 0.8;
+}
+
+.account-container{
+    margin-top: 2%;
+}
+
+icon {
+    display: inline;
+    opacity: 0.5;
+    margin:2%;
+}
+
+h4{
+    font-size: x-large;
+    margin-left:2%;
+    display: inline;
+}
+
+.account h4{
+   text-align: center;
+}
+
+.account {
+    margin:2%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 1rem;
+    row-gap: 1rem;
+}
+
+.details{
+    display: grid;
+    grid-template-columns: 2fr 8fr 2fr;
+    grid-template-rows: 3rem 6rem;
+    border: solid black 1px;
+    grid-template-areas:
+    "a a a "
+    "b c d";
+}
+
+.heading {
+    grid-area: a;
+}
+.icon {
+    grid-area: b;
+    text-align: center;
+}
+.info {
+    grid-area: c;
+}
+
+.info p{
+    margin: 1% 0;
+}
+.change {
+    grid-area: d;
+}
+
+button{
+   align-self: end;
+   height:50%;
+   margin:3%;
+}
+
+.account-container a{
+    margin-left: 0.5%;
+}

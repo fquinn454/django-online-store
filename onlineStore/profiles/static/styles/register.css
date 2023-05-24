@@ -10,6 +10,7 @@
 .form-container{
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .form-group{
@@ -24,26 +25,33 @@
     width: 40%;
 }
 
-input, label{
+.form-group p{
+    margin:1% 2%;
+}
+
+.form-group input{
     display: block;
     width: 100%;
-    margin-bottom: 1%; 
+    padding:2%;
 }
 
-h2{
-    margin-bottom: 4%;
+.form-group label{
+    display: block;
+    width: 100%;
+    font-size: large;
+    margin: 1% 0;
+    margin-bottom: 2%;
 }
-
 
 .submit-btn{
-    font-size: large;
+    font-size: x-large;
     background-color: #07377d;
     color:#e3dbdb;
     border: solid #07377d 1px;
     border-radius: 4px;
-    margin:5% 0; 
+    margin:5% 2%; 
     line-height: 2;
-    width: 100%;
+    width: 96%;
 }
 
 .submit-btn:hover{

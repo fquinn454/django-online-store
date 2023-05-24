@@ -27,20 +27,17 @@
 }
 
 button {
+    width: fit-content;
+    height:auto;
     margin: 0 auto;
-    padding: 0 10%;
+    padding-bottom : 2%;
     text-decoration: none;
     text-align: center;
-    font-size: large;
-    background-color: #07377d;
-    color:#e3dbdb;
+    font-size: 1.5rem;
     border-radius: 4px;
-    line-height: 2;
 }
 
 button:hover{
-    background-color:#e3dbdb;
-    color: #07377d;
     border: solid #07377d 1px;
     transition: background-color 0.8s, color 0.8s, border 0.8s;
 }
