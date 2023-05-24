@@ -121,6 +121,10 @@ class Profile(models.Model):
         if not request.user.is_authenticated:
             cart = request.session.get('cart', [])
             cart.append(product_id)
+            # use set to get unique product_ids
+            cart = set(cart) 
+            # session storage can not be set
+            cart = list(cart)
             request.session['cart'] = cart
             request.session.save()
         else:
