@@ -1,0 +1,18 @@
+/* Contains CSS Rules for elements login.html*/
+
+#account a, #account label{
+    color:#736d6d;
+    text-decoration: underline;
+    text-decoration-color: #736d6d;
+    cursor:default;
+    margin-bottom:3%;
+    opacity: 0.8;
+}
+
+
+.form-container{
+    flex-direction: column;
+    justify-content: center;
+    margin-top:4%;
+}
+

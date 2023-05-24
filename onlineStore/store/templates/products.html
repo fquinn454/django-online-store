@@ -8,22 +8,40 @@
 {% endblock %}
 
 {% block content %}
+<div class="sidebar">
+  <div class="filter-bar">
+    <div class="filters">
+      <a href="{% url 'products' %}"><strong>All Products</strong></a>
+      {% for category in categories %}
+        <a href="{% url 'getCategory' category=category %}">{{ category }}s</a>
+      {% endfor %}
+    </div>
+    <br>
+    <div class="filters">
+      <a href="{% url 'products' %}"><strong>All Brands</strong></a>
+      {% for brand in brands %}
+        <a href="{% url 'getBrand' brand=brand %}">{{ brand }}</a>
+      {% endfor %}
+    </div>
+  </div>
   <div class="products-container">
-  {% for product in products %}
-    <div class="product" id='{{ product.id }}'>
-        <a href="{% url 'showProduct' product_id=product.id %}"><img class="thumbnail" style="height:120px; width:180px;" src= '{{ product.thumbnail }} '></a>
-        <a href="{% url 'showProduct' product_id=product.id %}" ><strong>{{ product.title }}</strong></a>
-        <p class="price">Price £{{ product.price }}</p>
-        <div class="btn-toolbar">
-          <form class="btn-toolbar" action="{% url 'addToCart' product_id=product.id %}" method="post">
-            {% csrf_token %}
-            <button class="buy-btn" type="submit">Add&nbsp;To&nbsp;Cart</button>
-          </form>
-          <form class="btn-toolbar" action="{% url 'addFavourite' product_id=product.id %}" method="post">
-            {% csrf_token %}
-            <button class="favourite-btn" type="submit">{% icon 'heart-small' %}</button>
-          </form>
-        </div>
-    </div> 
-  {% endfor %}
+    {% for product in products %}
+      <div class="product" id='{{ product.id }}'>
+          <a href="{% url 'showProduct' product_id=product.id %}"><img class="thumbnail" style="height:120px; width:180px;" src= '{{ product.thumbnail }} '></a>
+          <a href="{% url 'showProduct' product_id=product.id %}"><strong>{{ product.title }}</strong></a>
+          <p class="price">Price £{{ product.price }}</p>
+          <div class="btn-toolbar">
+            <form action="{% url 'addToCart' product_id=product.id %}" method="post">
+              {% csrf_token %}
+              <button type="submit">Add&nbsp;To&nbsp;Cart</button>
+            </form>
+            <form action="{% url 'addFavourite' product_id=product.id %}" method="post">
+              {% csrf_token %}
+              <button type="submit">{% icon 'heart-small' %}</button>
+            </form>
+          </div>
+      </div> 
+    {% endfor %}
+  </div>
+</div>
 {% endblock %}

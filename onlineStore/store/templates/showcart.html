@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load icons %}
+{# Load the tag library #}
+{% load bootstrap5 %}
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+
+{% block css %}
+    <link href="{% static 'styles/base.css' %}" rel="stylesheet" >
+    <link href="{% static 'styles/showcart.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="product-container">
+  <h2>Cart</h2>
+  {% if products %}
+    {% for product in products %}
+        <div class="product" id='{{ product.id }}'>
+          <p>{{ product.title }}</p>
+          <p>£{{ product.price }}</p>
+          <div id="quantity">
+            <button>-</button>
+            <p>1</p>
+            <button>+</button>
+            <div>
+              <form action="{% url 'removeCartItem' product_id=product.id %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit">{% icon 'trash' %}</button>
+              </form>
+            </div>
+          </div>
+        </div>  
+    {% endfor %}
+    <div class="product total"><p>Total: </p><p>£{{ total }}</p><button class="pay-now">Pay&nbsp;Now</button></div>
+  {% endif %}
+  {% if not products %}
+  <p>Add <a  href="{% url 'products' %}">products</a> to your Cart</p>
+  {% endif %}
+{% endblock %}

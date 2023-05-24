@@ -33,51 +33,49 @@
     {% endblock %}
 
     <title>{% block title %} {% endblock %}</title>
+
+
   </head>
-  <body>
+  <body style="--bs-body-font-family: 'Noto Sans', sans-serif">
     {% block nav %}
-        <nav class="nav-bar" >
+        <nav>
           <img class="logo" src="{% static '/images/logo.png' %}" />
-          <div id="nav-container" class="nav-container">
-            <ul class="nav left" id="nav-bar">
-              <li id ="home" class="nav-item">
-                <a class="nav-link" href="{% url 'index' %}">Home</a>
-              </li>
-              <li id ="products" class="nav-item">
-                <a class="nav-link" href="{% url 'products' %}">Products</a>
-              </li>
-              <!--
-              <li class="nav-item">
-                <a class="nav-link " href="#">Sale</a>
-              </li>
-              -->
-            </ul>
-            <ul class="nav right"> 
-              <li id ="account" class="nav-item">
-                <a  class="nav-link " href="#">{% icon 'user' %}</a>
-                <label>Account&nbsp;</label>
-              </li>
-              <li id ="wish-list" class="nav-item">
-                <a class="nav-link " href="{% url 'showWishList' %}">{% icon 'heart' %}<span id='favourite-counter'class="badge">{{ favouritesLength }}</span></a>
-                <label>Wish&nbsp;List</label>
-              </li>
-              <li id ="cart" class="nav-item">
-                <a class="nav-link" href="#">{% icon 'cart' %}<span id='cart-counter'class="badge">{{ cartLength }}</span></a>
-                <label>Check&nbsp;Out</label>
-              </li>
-            </ul>
-          </div>
+          <ul class="nav-links-left">
+            <li id ="home">
+              <a href="{% url 'index' %}">Home</a>
+            </li>
+            <li id ="products">
+              <a  href="{% url 'products' %}">Products</a>
+            </li>
+          </ul>
+          <ul class="nav-links-right" > 
+            <li id ="account" >
+              <a href="{% url 'account-info' %}">{% icon 'user' %}</a>
+              <label>Account&nbsp;</label>
+            </li>
+            <li id ="wish-list" >
+              <a href="{% url 'showWishList' %}">{% icon 'heart' %}<span class="badge">{{ wishlistLength }}</span></a>
+              <label>Wish&nbsp;List</label>
+            </li>
+            <li id ="cart">
+              <a href="{% url 'showcart' %}">{% icon 'cart' %}<span class="badge">{{ cartLength }}</span></a>
+              <label>Check&nbsp;Out</label>
+            </li>
+          </ul>
+        </nav>
+
           <div class="nav-hamburger">
             <div class="dropdown">
               <button class="btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="true">
-                <a class="nav-link">{% icon 'bars' %}</a></button>
+                <a>{% icon 'bars' %}</a>
+              </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li><a class="dropdown-item" href="{% url 'index' %}">Home</a></li>
                 <li><a class="dropdown-item" href="{% url 'products' %}">Products</a></li>
                 <!--<li><a class="dropdown-item" href="#">Sale</a></li>-->
-                <li><a class="dropdown-item" href="#">Account</a></li>
+                <li><a class="dropdown-item" href="{% url 'account-info' %}">Account</a></li>
                 <li><a class="dropdown-item" href="{% url 'showWishList' %}">Wish&nbsp;List</a></li>
-                <li><a class="dropdown-item" href="#">Check&nbsp;Out</a></li>
+                <li><a class="dropdown-item" href="{% url 'showcart' %}">Check&nbsp;Out</a></li>
               </ul>
             </div>
           </div>

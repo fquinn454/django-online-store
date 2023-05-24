@@ -1,28 +1,34 @@
 /* Contains CSS Rules for elements in showProducts.html*/
 
-.full-product-container{
+.product-container{
+    padding-top: 3%;
     display: grid;
     grid-template-columns: 5fr 6fr 1fr;
     grid-gap: 20px;
 }
 
 @media screen and (max-width: 700px){
-    .full-product-container{
-        grid-template-columns: 1fr
+    .product-container {
+        grid-template-columns: 1fr;
     }
 
-    .product-info{
+    .product-info {
         margin-left: 4%;
         margin-right: 4%;
     }
 
-    h2{
+    h2 {
         margin-top: 3%;
     }
 }
 
-.carousel{
+.carousel {
     margin-left: 4%;
+}
+
+.carousel-inner img{
+    width: auto;
+    height:400px;
 }
 
 .carousel-control-next-icon,
@@ -30,7 +36,7 @@
   filter: invert(1);
 }
 
-.carousel-indicators{
+.carousel-indicators {
     filter: invert(1);
 }
 
@@ -39,15 +45,33 @@
     width: 100%;
 }
 
-.breadcrumb{
+form{
+    display: inline;
+}
+
+.breadcrumb-nav {
+    display: inline;
+}
+
+form button {
+    height:2rem;
+}
+
+.breadcrumb {
+    display: flex;
+    justify-content: flex-start;
     margin-top:2%;
     margin-left:2%;
 }
 
-.breadcrumb-item a {
-    color: #07377d;
+.breadcrumb-item {
+    margin-right:0;
 }
 
-.breadcrumb-item a:active {
+.breadcrumb-nav a {
+    color: #07377d;
+    margin-right:0;
+}
+.breadcrumb-nav a:active {
     color:#736d6d;
 }

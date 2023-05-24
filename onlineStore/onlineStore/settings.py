@@ -28,9 +28,10 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
-LOGIN_REDIRECT_URL = "/home"
+LOGIN_REDIRECT_URL = "/account-info"
+LOGOUT_REDIRECT_URL = "/home"
 
 # Application definition
 INSTALLED_APPS = [
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'stripe',
     'bootstrap5',
     'django_icons',
     'store',
@@ -49,12 +51,16 @@ INSTALLED_APPS = [
 DJANGO_ICONS = {
     "ICONS": {
         "user": {"name": "fa fa-user fa-2x"},
+        "account": {"name": "fa fa-user fa-4x"},
         "heart" : {"name": "fa fa-heart fa-2x"},
         "heart-small" : {"name": "fa fa-heart"},
         "cart" : {"name": "fa fa-shopping-cart fa-2x"},
         "carrat": {"name" : "fa fa-caret-down"},
         "bars": {"name": "fa fa-solid fa-bars fa-2x"},
-        "trash": {"name": "fa fa-trash"}
+        "trash": {"name": "fa fa-trash"},
+        "address":{"name": "fa fa-map-marker fa-4x"},
+        "cog":{"name":"fa fa-cog fa-4x"},
+        "orders":{"name":"fa fa-truck fa-4x"}
     },
 }
 
@@ -82,7 +88,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.template.context_processors.request'
+                'django.template.context_processors.request',
+                'store.context_processors.getCounts'  # <-- custom context processor
             ],
         },
     },

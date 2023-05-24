@@ -1,5 +1,3 @@
-<!-- Rules for showWishList.html -->
-
 {% extends 'base.html' %}
 {% load static%}
 {% load icons %}
@@ -10,62 +8,61 @@
 {% endblock %}
 
 {% block content %}
-  <div class="products-container-big">
+  <div class="product-container">
     <h2>Wish List</h2>
     {% for product in products %}
         <div class="product" id='{{ product.id }}'>
             <img class="thumbnail"  src= '{{ product.thumbnail }} '>
             <a href="{% url 'showProduct' product_id=product.id %}" ><strong>{{ product.title }}</strong></a>
             <p>{{ product.description }}</p>
-            <p class="price">Price £{{ product.price }}</p>
-            <div class="btn-toolbar">
-                <form class="btn-toolbar" action="{% url 'addToCart' product_id=product.id %}" method="post">
+            <p id="price">Price £{{ product.price }}</p>
+            <div class="button-group">
+                <form action="{% url 'addToCart' product_id=product.id %}" method="post">
                     {% csrf_token %}
-                    <button class="buy-btn" type="submit">Add&nbsp;To&nbsp;Cart</button>
+                    <button type="submit">Add&nbsp;To&nbsp;Cart</button>
                 </form>
-                <form class="btn-toolbar" action="{% url 'removeWishListItem' product_id=product.id %}" method="post">
+                <form action="{% url 'removeWishListItem' product_id=product.id %}" method="post">
                     {% csrf_token %}
-                    <button  type="submit">{% icon 'trash' %}</button>
+                    <button type="submit">{% icon 'trash' %}</button>
                 </form>
             </div>
         </div> 
     {% endfor %}
+    {% if products %}
     <form action="{% url 'deleteWishList' %}" method="post">
         {% csrf_token %}
-        <button class="clear-btn" type="submit">Clear&nbsp;Wish&nbsp;List</button>
+        <button type="submit">Clear&nbsp;Wish&nbsp;List</button>
     </form>
-    <form action="{% url 'saveWishList' %}" method="post">
-        {% csrf_token %}
-        <button class="clear-btn" type="submit">Save&nbsp;Wish&nbsp;List</button>
-    </form>
+    {% endif %}
+    {% if not products %}
+    <p>Add <a  href="{% url 'products' %}">products</a> to your Wishlist</p>
+    {% endif %}
   </div>
-
-  <div class="products-container-small">
+  
+  <div class="product-container-small-screen">
     <h2>Wish List</h2>
     {% for product in products %}
         <div class="product" id='{{ product.id }}'>
-            <img class="thumbnail" style="height:120px; width:180px;" src= '{{ product.thumbnail }} '>
+            <img  style="height:120px; width:180px;" src= '{{ product.thumbnail }} '>
             <a href="{% url 'showProduct' product_id=product.id %}" ><strong>{{ product.title }}</strong></a>
-            <p class="price">Price £{{ product.price }}</p>
-            <div class="btn-toolbar">
-                <form class="btn-toolbar" action="{% url 'addToCart' product_id=product.id %}" method="post">
+            <p>Price £{{ product.price }}</p>
+            <div class="button-group">
+                <form action="{% url 'addToCart' product_id=product.id %}" method="post">
                     {% csrf_token %}
-                    <button class="buy-btn" type="submit">Add&nbsp;To&nbsp;Cart</button>
+                    <button type="submit">Add&nbsp;To&nbsp;Cart</button>
                 </form>
-                <form class="btn-toolbar" action="{% url 'removeWishListItem' product_id=product.id %}" method="post">
+                <form action="{% url 'removeWishListItem' product_id=product.id %}" method="post">
                     {% csrf_token %}
-                    <button  type="submit">{% icon 'trash' %}</button>
+                    <button type="submit">{% icon 'trash' %}</button>
                 </form>
             </div>
         </div> 
     {% endfor %}
-    <form action="{% url 'deleteWishList' %}" method="post">
-        {% csrf_token %}
-        <button class="clear-btn" type="submit">Clear&nbsp;Wish&nbsp;List</button>
-    </form>
-    <form action="#" method="post">
-        {% csrf_token %}
-        <button class="clear-btn" type="submit">Save&nbsp;Wish&nbsp;List</button>
-    </form>
+        <div class="button-group ">
+            <form action="{% url 'deleteWishList' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Clear&nbsp;Wish&nbsp;List</button>
+            </form>
+        </div>
   </div>
 {% endblock %}

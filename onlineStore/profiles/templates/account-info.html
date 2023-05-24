@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+{% load icons %}
+
+{% block css %}
+    <link href="{% static 'styles/base.css' %}" rel="stylesheet" >
+    <link href="{% static 'styles/account-info.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="account-container">
+    <h4>Welcome {{ request.user.username }}</h4><a href = "{% url 'logout' %}">(Logout)</a>
+    <div class="account">    
+        <div class="details">
+            <h4 class="heading">My Details</h4>
+            <div class="icon">
+                <icon>{% icon 'account' %}</icon>
+            </div>
+            <div class="info">
+                <p><strong>Username:</strong>{{ request.user.username }}</p>
+                <p><strong>Email:</strong>{{ request.user.email }}</p>
+                <p><strong>Password:</strong>********</p>
+            </div>
+            <button class="change">Edit</button>
+        </div>
+        <div class="details">
+            <h4 class="heading">My Orders</h4>
+            <icon class="icon">{% icon 'orders' %}</icon>
+            <div class="info">
+            </div>
+            <button class="change">View</button>
+        </div>
+        <div class="details">
+            <h4 class="heading">My Addresses</h4>
+            <icon class="icon">{% icon 'address' %}</icon>
+            <div class="info">
+
+            </div>
+            <button class="change">View</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -9,12 +9,13 @@
 {% block content %}
     <div class="hero">
         <div class="intro-container">
-            <div class="intro">
-                <div>                
-                    <p> Get the best deals on mobile phones and laptops from the comfort of home </p>
-                </div>
-                <a class="enter btn" href="{% url 'products' %}">Shop&nbsp;Now</a>
-            </div>
+            <p> Get the best deals on mobile phones and laptops from the comfort of home </p>
+            <br>
+            <form action="{% url 'products' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Shop&nbsp;Now</button>
+            </form>
+            
         </div>
     </div>
 {% endblock content %}
