@@ -68,11 +68,11 @@
             <p class="price">Price £{{ product.price }}</p>
             <br>
             <div >
-              <form action="{% url 'addToCart' product_id=product.id %}" method="post">
+              <form action="{% url 'addToCart' product.id %}" method="post">
                 {% csrf_token %}
                 <button type="submit">Add&nbsp;To&nbsp;Cart</button>
               </form>
-              <form action="{% url 'addFavourite' product_id=product.id %}" method="post">
+              <form action="{% url 'addFavourite' product.id %}" method="post">
                 {% csrf_token %}
                 <button type="submit">{% icon 'heart-small' %}</button>
               </form>

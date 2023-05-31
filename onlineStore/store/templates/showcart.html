@@ -11,22 +11,29 @@
 {% block css %}
     <link href="{% static 'styles/base.css' %}" rel="stylesheet" >
     <link href="{% static 'styles/showcart.css' %}" rel="stylesheet">
+    <script src="{% static 'script.js' %}" defer></script>
 {% endblock %}
 
 {% block content %}
 <div class="product-container">
   <h2>Cart</h2>
-  {% if products %}
-    {% for product in products %}
-        <div class="product" id='{{ product.id }}'>
-          <p>{{ product.title }}</p>
-          <p>£{{ product.price }}</p>
+  {% if productsets %}
+    {% for productset in productsets %}
+        <div class="product" id='{{ productset.product.id }}'>
+          <p>{{ productset.product.title }}</p>
+          <p>£{{ productset.getTotalCost }}</p>
           <div id="quantity">
-            <button>-</button>
-            <p>1</p>
-            <button>+</button>
+            <form action="{% url 'decrement' productset.product.id  %}" method="post">
+              {% csrf_token %}
+              <button>-</button>
+            </form>
+            <p>{{ productset.quantity }}</p>
+            <form action="{% url 'increment' productset.product.id %}" method="post">
+              {% csrf_token %}
+              <button>+</button>
+            </form>
             <div>
-              <form action="{% url 'removeCartItem' product_id=product.id %}" method="post">
+              <form action="{% url 'removeCartItem' productset.product.id %}" method="post">
                   {% csrf_token %}
                   <button type="submit">{% icon 'trash' %}</button>
               </form>
@@ -34,9 +41,12 @@
           </div>
         </div>  
     {% endfor %}
-    <div class="product total"><p>Total: </p><p>£{{ total }}</p><button class="pay-now">Pay&nbsp;Now</button></div>
+    <div class="product total">
+      <p>Total: </p ><p id="total" totalToDisplay=0 total={{total}}>£{{total}}</p>
+      <button class="pay-now">Pay&nbsp;Now</button>
+    </div>
   {% endif %}
-  {% if not products %}
+  {% if not productsets %}
   <p>Add <a  href="{% url 'products' %}">products</a> to your Cart</p>
   {% endif %}
 {% endblock %}

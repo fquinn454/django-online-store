@@ -19,12 +19,12 @@ class Product(models.Model):
     id = models.IntegerField(primary_key=True, unique=True)
     title = models.CharField(max_length=100)
     description = models.TextField()
-    price = models.IntegerField()
+    price = models.PositiveIntegerField()
     thumbnail = models.CharField(max_length=100)
     brand = models.CharField(max_length=100, choices=BRANDS)
     category = models.CharField(max_length=100, choices=CATEGORIES)
     rating = models.FloatField()
-    stock = models.IntegerField()
+    stock = models.PositiveIntegerField()
     discount = models.FloatField()
 
     class Meta:

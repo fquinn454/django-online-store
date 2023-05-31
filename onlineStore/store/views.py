@@ -1,7 +1,7 @@
 # from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .models import Product, Image
-from profiles.models import Profile
+from profiles.models import Profile, ProductSet
 
 # HOMEPAGE
 # returns homepage
@@ -65,18 +65,26 @@ def delWishList(request):
 # CART
 # returns user cart
 def showCart(request):
-   products = Profile.getCartItems(request)
-   total = Profile.sumCart(request)
-   context = {'products': products, 'total': total}
-   return render(request, "showcart.html", context)
+    productsets = ProductSet.getCartItems(request)
+    total = ProductSet.sumCart(request)
+    context = {'productsets': productsets, 'total': total }
+    return render(request, "showcart.html", context)
 
 # returns showCart.html after user add product to cart
 def addToCart(request, product_id):
-    Profile.addProductToCart(request, product_id)
+    ProductSet.addProductToCart(request, product_id)
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
 # returns showcart.html after user deletes a product from cart
 def removeCartItem(request, product_id):
-    Profile.removeProductFromCart(request, product_id)
+    ProductSet.removeProductFromCart(request, product_id)
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+def increment(request, product_id):
+    ProductSet.increment(request, product_id)
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+def decrement(request, product_id):
+    ProductSet.decrement(request, product_id)
     return redirect(request.META.get('HTTP_REFERER', '/'))
 

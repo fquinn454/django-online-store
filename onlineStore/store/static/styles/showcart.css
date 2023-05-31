@@ -45,6 +45,11 @@ button {
 
 #quantity p{
   width:fit-content;
+  margin: 0 5px
+}
+
+#quantity button{
+  margin: 0 2px;
 }
 
 .total{
@@ -54,6 +59,7 @@ button {
 }
 
 .pay-now{
-  width: fit-content;
+  width: 120px;
+  margin: 0;
   height: auto;
 }

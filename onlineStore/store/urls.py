@@ -14,5 +14,8 @@ urlpatterns = [
     path('showWishList', views.showWishList, name='showWishList'),
     path('removeWishListItem/<product_id>', views.removeWishListItem, name='removeWishListItem'),
     path('showcart', views.showCart, name="showcart"),
-    path('removeCartItem/<product_id>', views.removeCartItem, name='removeCartItem')
+    path('removeCartItem/<product_id>', views.removeCartItem, name='removeCartItem'),
+    path('increment/<product_id>', views.increment, name='increment'),
+    path('decrement/<product_id>', views.decrement, name='decrement'),
+    
 ]
