@@ -54,10 +54,19 @@ class ProductSet(models.Model):
                 profile.cart.add(ProductSet.objects.create(user = request.user, product = product))
         else:
             cart = request.session.get('cart', [])
-            cart.append((int(product_id), int(1)))
-            request.session['cart'] = cart
-            request.session.save()
+            if len(cart) > 0:
+                products = []
+                for item in cart:
+                    products.append(int(item[0]))
 
+                if int(product_id) not in products:
+                    cart.append((int(product_id), int(1)))
+                    request.session['cart'] = cart
+                    request.session.save()
+            else:
+                cart.append((int(product_id), int(1)))
+                request.session['cart'] = cart
+                request.session.save()
 
     # Removes an item from a user's cart
     def removeProductFromCart(request, product_id):
@@ -125,8 +134,7 @@ class ProductSet(models.Model):
                         item[1] -= 1
                         request.session['cart'] = cart
                         request.session.save()
-                
-
+        
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     wishlist = models.ManyToManyField(Product, related_name='wishlist', blank=True)

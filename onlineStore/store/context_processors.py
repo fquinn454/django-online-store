@@ -28,16 +28,14 @@ def getCounts(request):
         session_wishlist = request.session.get('wishlist', [])
         session_wishlist = set(session_wishlist)
         session_wishlist = list(session_wishlist)
-        session_cart = request.session.get('cart', {})
-        session_cart = set(session_cart)
-        session_cart = list(session_cart)
+        session_cart = request.session.get('cart', [])
         # add them to the now logged in user's wishlist and cart
         profile = Profile.objects.get(user = request.user)
         for id_num in session_wishlist:
             profile.wishlist.add(Product.objects.get(pk = id_num))
         
         for id_num in session_cart:
-            productSet = ProductSet.objects.create(user= request.user, product = Product.objects.get(pk = id_num))
+            productSet = ProductSet.objects.create(user= request.user, product = Product.objects.get(pk = id_num[0]))
             profile.cart.add(productSet)
         
         # get the count of cart and wishlish for nav badges
@@ -50,7 +48,7 @@ def getCounts(request):
         wishlist = []
         request.session['wishlist'] = wishlist
         request.session.save()
-        cart = {}
+        cart = []
         request.session['cart'] = cart
         request.session.save()
         return {'cartLength': cartLength, 'wishlistLength': wishlistLength}
