@@ -11,6 +11,8 @@
 {% block css %}
     <link href="{% static 'styles/base.css' %}" rel="stylesheet" >
     <link href="{% static 'styles/showcart.css' %}" rel="stylesheet">
+    <script type = "application/javascript" src="https://js.stripe.com/v3/" defer></script>
+    <script src="{% static 'script.js' %}" defer></script>
 {% endblock %}
 
 {% block content %}
@@ -42,7 +44,7 @@
     {% endfor %}
     <div class="product total">
       <p>Total: </p ><p id="total" totalToDisplay=0 total={{total}}>£{{total}}</p>
-      <button class="pay-now">Pay&nbsp;Now</button>
+      <button id="submitBtn" class="pay-now" type="submit">Checkout</button>
     </div>
   {% endif %}
   {% if not productsets %}

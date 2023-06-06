@@ -1,7 +1,13 @@
 # from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
 from .models import Product, Image
+from django.http import JsonResponse
 from profiles.models import Profile, ProductSet
+import stripe
+import json
+from django.views.generic.base import TemplateView
 
 # HOMEPAGE
 # returns homepage
@@ -88,3 +94,53 @@ def decrement(request, product_id):
     ProductSet.decrement(request, product_id)
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
+# Stripe checkout
+@csrf_exempt
+def stripe_config(request):
+    if request.method == 'GET':
+        stripe_config = {'publicKey': settings.STRIPE_PUBLIC_KEY}
+        return JsonResponse(stripe_config, safe=False)
+
+
+@csrf_exempt
+def create_checkout_session(request):
+    if request.method == 'GET':
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        productsets = ProductSet.getCartItems(request)
+        price = 0
+        items = []
+
+        for productset in productsets:
+            product = productset.product
+            price += product.price * productset.quantity
+
+            obj = {
+                'price_data': {
+                    'currency': 'gbp',
+                    'product_data' : {
+                        'name': product.title,
+                    },
+                    'unit_amount': int(product.price*100),
+                },
+                'quantity': productset.quantity
+            }
+            items.append(obj)
+
+        try:
+            session = stripe.checkout.Session.create(
+                payment_method_types =['card'],
+                line_items = items,
+                mode='payment', 
+                success_url= 'http://127.0.0.1:8000/success',
+                cancel_url = 'http://127.0.0.1:8000/cancelled'
+            )
+            return JsonResponse({'sessionId': session['id']})
+        
+        except Exception as e:
+            return JsonResponse({'error': str(e)})
+
+def success(request):
+    return render(request, "success.html")
+
+def cancelled(request):
+    return render(request, "cancelled.html")

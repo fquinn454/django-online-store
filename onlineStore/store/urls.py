@@ -17,5 +17,8 @@ urlpatterns = [
     path('removeCartItem/<product_id>', views.removeCartItem, name='removeCartItem'),
     path('increment/<product_id>', views.increment, name='increment'),
     path('decrement/<product_id>', views.decrement, name='decrement'),
-    
+    path('config', views.stripe_config, name='config'),
+    path('create-checkout-session/', views.create_checkout_session, name='create_checkout_session'),
+    path('success/', views.success, name='success'),
+    path('cancelled', views.cancelled, name='cancelled'),
 ]
