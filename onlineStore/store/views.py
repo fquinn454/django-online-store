@@ -6,8 +6,7 @@ from .models import Product, Image
 from django.http import JsonResponse
 from profiles.models import Profile, ProductSet
 import stripe
-import json
-from django.views.generic.base import TemplateView
+
 
 # HOMEPAGE
 # returns homepage
@@ -134,6 +133,7 @@ def create_checkout_session(request):
                 success_url= 'http://127.0.0.1:8000/success',
                 cancel_url = 'http://127.0.0.1:8000/cancelled'
             )
+        
             return JsonResponse({'sessionId': session['id']})
         
         except Exception as e:
