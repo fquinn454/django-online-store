@@ -31,7 +31,7 @@ button:hover {
 /* Nav */
 nav {
     display:flex;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     background-color: #e7e5f7;
 }
 
@@ -70,7 +70,7 @@ nav a:hover {
     justify-content: center;
 }
 
-/* Shows number of items in wishlist and cart*/
+/* Shows number of items in wishlist and cart */
 .badge{
     background-color: #736d6d;
     font-size: 12px;
@@ -79,7 +79,7 @@ nav a:hover {
     padding: 2px 5px;
     position: relative;
     left: -10px;
-    top: -32px;
+    top: -28px;
 }
 
 /* hamburger icon for navigation menu on small screens */

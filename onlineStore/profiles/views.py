@@ -18,6 +18,8 @@ def register(request):
             user = form.save()
             login(request, user)
             return redirect('account-info')
+        else:
+            context['form'] = form
     else:
         form = RegisterForm()
         context = {"form": form}

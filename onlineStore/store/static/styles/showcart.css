@@ -63,3 +63,9 @@ button {
   margin: 0;
   height: auto;
 }
+
+.no-products{
+  margin:2%;
+  font-size: 1.2rem;
+}
+

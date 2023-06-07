@@ -16,38 +16,44 @@
 {% endblock %}
 
 {% block content %}
-<div class="product-container">
-  <h2>Cart</h2>
   {% if productsets %}
-    {% for productset in productsets %}
-        <div class="product" id='{{ productset.product.id }}'>
-          <p>{{ productset.product.title }}</p>
-          <p>£{{ productset.getTotalCost }}</p>
-          <div id="quantity">
-            <form action="{% url 'decrement' productset.product.id  %}" method="post">
-              {% csrf_token %}
-              <button>-</button>
-            </form>
-            <p>{{ productset.quantity }}</p>
-            <form action="{% url 'increment' productset.product.id %}" method="post">
-              {% csrf_token %}
-              <button>+</button>
-            </form>
-            <div>
-              <form action="{% url 'removeCartItem' productset.product.id %}" method="post">
+    <div class="product-container">
+      <h2>Cart</h2>
+        {% for productset in productsets %}
+            <div class="product" id='{{ productset.product.id }}'>
+              <p>{{ productset.product.title }}</p>
+              <p>£{{ productset.getTotalCost }}</p>
+              <div id="quantity">
+                <form action="{% url 'decrement' productset.product.id  %}" method="post">
                   {% csrf_token %}
-                  <button type="submit">{% icon 'trash' %}</button>
-              </form>
-            </div>
-          </div>
-        </div>  
-    {% endfor %}
-    <div class="product total">
-      <p>Total: </p ><p id="total" totalToDisplay=0 total={{total}}>£{{total}}</p>
-      <button id="submitBtn" class="pay-now" type="submit">Checkout</button>
-    </div>
-  {% endif %}
-  {% if not productsets %}
-  <p>Add <a  href="{% url 'products' %}">products</a> to your Cart</p>
-  {% endif %}
+                  <button>-</button>
+                </form>
+                <p>{{ productset.quantity }}</p>
+                <form action="{% url 'increment' productset.product.id %}" method="post">
+                  {% csrf_token %}
+                  <button>+</button>
+                </form>
+                <div>
+                  <form action="{% url 'removeCartItem' productset.product.id %}" method="post">
+                      {% csrf_token %}
+                      <button type="submit">{% icon 'trash' %}</button>
+                  </form>
+                </div>
+              </div>
+            </div>  
+        {% endfor %}
+        <div class="product total">
+          <p>Total: </p ><p id="total" totalToDisplay=0 total={{total}}>£{{total}}</p>
+          <button id="submitBtn" class="pay-now" type="submit">Checkout</button>
+        </div>
+      </div>
+
+    {% endif %}
+    {% if not productsets %}
+    <div class="no-products">
+      <h2>Cart</h2>
+      <p>Add <a  href="{% url 'products' %}">products</a> to your Cart</p>
+    <div>
+    {% endif %}
+  
 {% endblock %}
