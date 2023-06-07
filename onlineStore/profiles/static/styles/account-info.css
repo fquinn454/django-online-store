@@ -72,3 +72,9 @@ button{
 .account-container a{
     margin-left: 0.5%;
 }
+
+@media only screen and (max-width: 900px) {
+    .account{
+        grid-template-columns: 1fr;
+    }
+}
