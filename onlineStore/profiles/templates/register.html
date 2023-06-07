@@ -12,7 +12,15 @@
         <form method="POST" class="form-group">
             <h2>Register</h2>
             {% csrf_token %}
-            {{ form.as_p }}  
+            {% for field in form %}
+                <p>{{ field.label_tag }}</p>
+                <p>{{ field }}</p>
+                {% for error in field.errors %}
+                    <div class="error-message">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
             <button type="submit" class="submit-btn">Register</button>
         </form>
     </div>

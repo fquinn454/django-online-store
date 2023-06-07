@@ -65,6 +65,11 @@ span.helptext, .form-group li{
     display: none;
 }
 
+.error-message{
+    margin-left:2%;
+    color:red;
+}
+
 @media screen and (max-width: 800px){
     .form-group{
         width:70%;

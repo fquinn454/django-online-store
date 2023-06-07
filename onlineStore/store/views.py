@@ -8,7 +8,6 @@ from django.http import JsonResponse
 from profiles.models import Profile, ProductSet
 import stripe
 
-
 # HOMEPAGE
 # returns homepage
 def index(request):
@@ -129,11 +128,12 @@ def create_checkout_session(request):
 
         try:
             session = stripe.checkout.Session.create(
+                shipping_address_collection={"allowed_countries": ["GB"]},
                 payment_method_types =['card'],
                 line_items = items,
                 mode='payment', 
                 success_url= 'http://127.0.0.1:8000/success',
-                cancel_url = 'http://127.0.0.1:8000/cancelled'
+                cancel_url = 'http://127.0.0.1:8000/cancelled',
             )
         
             return JsonResponse({'sessionId': session['id']})

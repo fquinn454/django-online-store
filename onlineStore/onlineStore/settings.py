@@ -102,8 +102,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'onlineStore.wsgi.application'
-
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
