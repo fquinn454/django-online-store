@@ -1,6 +1,7 @@
 # from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from .models import Product, Image
 from django.http import JsonResponse
@@ -69,6 +70,7 @@ def delWishList(request):
 
 # CART
 # returns user cart
+@login_required
 def showCart(request):
     productsets = ProductSet.getCartItems(request)
     total = ProductSet.sumCart(request)

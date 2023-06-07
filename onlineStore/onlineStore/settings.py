@@ -35,6 +35,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'quinnf.pythonanywhere.com']
 
+LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = "/account-info"
 LOGOUT_REDIRECT_URL = "/"
 
