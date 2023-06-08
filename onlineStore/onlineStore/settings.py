@@ -28,11 +28,11 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # Stripe API Keys
 STRIPE_PUBLIC_KEY = os.environ.get('PUBLISHABLE_KEY_STRIPE')
 STRIPE_SECRET_KEY = os.environ.get('SECRET_KEY_STRIPE')
+STRIPE_ENDPOINT_SECRET=os.environ.get('STRIPE_ENDPOINT_SECRET')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = ['127.0.0.1', 'quinnf.pythonanywhere.com']
 
 LOGIN_URL = 'login'

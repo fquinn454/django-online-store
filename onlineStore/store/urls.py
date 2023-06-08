@@ -21,4 +21,5 @@ urlpatterns = [
     path('create-checkout-session/', views.create_checkout_session, name='create_checkout_session'),
     path('success/', views.success, name='success'),
     path('cancelled', views.cancelled, name='cancelled'),
+    path('webhook/', views.stripe_webhook, name='web-hook'), 
 ]

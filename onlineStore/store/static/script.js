@@ -1,5 +1,3 @@
-console.log("Sanity check!")
-
 fetch("config")
 .then((result) => { return result.json(); })
 .then((data) => {
