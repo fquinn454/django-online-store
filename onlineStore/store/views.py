@@ -5,6 +5,8 @@ from django.conf import settings
 from .models import Product, Image
 from django.http import JsonResponse, HttpResponse
 from profiles.models import Profile, ProductSet
+from address.models import Address
+from order.models import Order
 import stripe
 
 # HOMEPAGE
@@ -174,6 +176,15 @@ def stripe_webhook(request):
           event['data']['object']['id'],
           expand=['line_items'],
         )
+        address = Address(
+            profile=Profile.objects.get(user = request.user),
+            line1=session.customer_details.address.line1,
+            line2=session.customer_details.address.line2,
+            city=session.customer_details.address.city,
+            postal_code=session.customer_details.address.postal_code
+            )
+        address.save()
+
         print(session.customer_details.address.line1)
         print(session.customer_details.address.line2)
         print(session.customer_details.address.city)

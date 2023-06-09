@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'django_icons',
     'store',
     'profiles',
+    'order', 
+    'address',
 ]
 
 DJANGO_ICONS = {
