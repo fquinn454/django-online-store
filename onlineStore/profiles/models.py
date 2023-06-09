@@ -5,7 +5,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 """
-Profile has a one to one link with the build in User model. 
+Profile has a one to one link with the build in User model.
 The built in User model is used for for authentication.
 The Profile model stores addidtional data for the user's cart and user's wishlist
 """
@@ -16,10 +16,10 @@ class ProductSet(models.Model):
 
     def __str__(self):
         return self.product.title+" x "+str(self.quantity)
-    
+
     def getTotalCost(self):
         return self.product.price * self.quantity
-    
+
     # Display a user's cart
     def getCartItems(request):
         if request.user.is_authenticated:
@@ -83,14 +83,14 @@ class ProductSet(models.Model):
                     request.session['cart'] = cart
                     request.session.save()
 
-    # Sum the cost of all the items in a user's cart    
+    # Sum the cost of all the items in a user's cart
     def sumCart(request):
         if request.user.is_authenticated:
             profile = Profile.objects.get(user = request.user)
             productsets = profile.cart.all()
             sum = 0
             for productset in productsets:
-                sum += productset.product.price * productset.quantity
+                sum += productset.product.price * 1
             return sum
         else:
             cart = request.session.get('cart', [])
@@ -109,7 +109,7 @@ class ProductSet(models.Model):
             productset = productsets.get(user = request.user, product = product)
             productset.quantity += 1
             productset.save()
-        else:  
+        else:
             cart = request.session.get('cart', [])
             for item in cart:
                 if item[0] == int(product_id):
@@ -126,7 +126,7 @@ class ProductSet(models.Model):
             if productset.quantity > 1:
                 productset.quantity -= 1
                 productset.save()
-        else:  
+        else:
             cart = request.session.get('cart', [])
             for item in cart:
                 if item[0] == int(product_id):
@@ -134,16 +134,16 @@ class ProductSet(models.Model):
                         item[1] -= 1
                         request.session['cart'] = cart
                         request.session.save()
-        
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     wishlist = models.ManyToManyField(Product, related_name='wishlist', blank=True)
     cart = models.ManyToManyField(ProductSet, related_name='cart', blank=True)
 
-    # return user.username 
+    # return user.username
     def __str__(self):
         return self.user.username
-    
+
     # Automatically create a Profile instance when a new User instance is created
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
@@ -155,7 +155,7 @@ class Profile(models.Model):
     def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
 
-    # Display a user's wishlist 
+    # Display a user's wishlist
     def getWishlistProducts(request):
         if not request.user.is_authenticated:
             productsToGet = request.session.get('wishlist', [])
@@ -176,14 +176,14 @@ class Profile(models.Model):
             for product in profile.wishlist.all():
                 products.append(product)
             return products
-        
+
     # Add a product to user wishlist
     def addProductToWishlist(request, product_id):
         if not request.user.is_authenticated:
             wishlist = request.session.get('wishlist', [])
             wishlist.append(product_id)
             # use set to get unique product_ids
-            wishlist = set(wishlist) 
+            wishlist = set(wishlist)
             # session storage can not be set
             wishlist = list(wishlist)
             request.session['wishlist'] = wishlist
@@ -192,14 +192,14 @@ class Profile(models.Model):
             profile = Profile.objects.get(user = request.user)
             product = Product.objects.get(id = product_id)
             profile.wishlist.add(product)
-    
+
     # Delete item from user wishlist
     def removeProductFromWishlist(request, product_id):
         if not request.user.is_authenticated:
             wishlist = request.session.get('wishlist', [])
             wishlist.remove(product_id)
             # use set to get unique product_ids
-            wishlist = set(wishlist) 
+            wishlist = set(wishlist)
             # session storage can not be set
             wishlist = list(wishlist)
             request.session['wishlist'] = wishlist
@@ -220,7 +220,6 @@ class Profile(models.Model):
             profile = Profile.objects.get(user = request.user)
             profile.wishlist.clear()
 
-    
 
 
 
@@ -228,6 +227,7 @@ class Profile(models.Model):
 
 
 
-    
+
+
 
 

@@ -7,3 +7,7 @@ class Address(models.Model):
     line2= models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     postal_code = models.CharField(max_length=100)
+
+
+    def __str__(self):
+        return self.line1+", "+self.line2+", "+self.city+", "+self.postal_code

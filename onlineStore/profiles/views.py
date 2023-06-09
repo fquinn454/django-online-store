@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from .forms import RegisterForm
 from .models import Profile
+from address.models import Address
 
 load_dotenv()
 stripe.api_key = os.environ.get('STRIPE_SECRET_KEY')
@@ -27,7 +28,9 @@ def register(request):
 
 def accountInfo(request):
     if request.user.is_authenticated:
-        return render(request, 'account-info.html')
+        addresses=Address.objects.filter(profile = Profile.objects.get(user = request.user))
+
+        return render(request, 'account-info.html', {'addresses':addresses_to_use})
     else:
         return redirect('login')
 

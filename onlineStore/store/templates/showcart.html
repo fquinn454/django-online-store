@@ -40,10 +40,10 @@
                   </form>
                 </div>
               </div>
-            </div>  
+            </div>
         {% endfor %}
         <div class="product total">
-          <p>Total: </p ><p id="total" totalToDisplay=0 total={{total}}>£{{total}}</p>
+          <p>Total: </p ><p id="total">£{{total}}</p>
           <button id="submitBtn" class="pay-now" type="submit">Checkout</button>
         </div>
       </div>
@@ -55,5 +55,5 @@
       <p>Add <a  href="{% url 'products' %}">products</a> to your Cart</p>
     <div>
     {% endif %}
-  
+
 {% endblock %}
