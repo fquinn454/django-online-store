@@ -37,7 +37,7 @@ def getBrand(request, brand):
     context = {'products': products, 'categories':categories, 'brands': brands}
     return render(request, "products.html", context)
 
-# returns product info for single product 
+# returns product info for single product
 def showProduct(request, product_id):
     product = Product.objects.get(pk=product_id)
     images = Image.objects.filter(product = product_id)
@@ -45,7 +45,7 @@ def showProduct(request, product_id):
     return render(request, "showProduct.html", context)
 
 # WISHLIST
-# returns user Wish List 
+# returns user Wish List
 def showWishList(request):
    products = Profile.getWishlistProducts(request)
    context = {'products': products}
@@ -131,13 +131,13 @@ def create_checkout_session(request):
                 shipping_address_collection={"allowed_countries": ["GB"]},
                 payment_method_types =['card'],
                 line_items = items,
-                mode='payment', 
-                success_url= 'http://127.0.0.1:8000/success',
-                cancel_url = 'http://127.0.0.1:8000/cancelled',
+                mode='payment',
+                success_url= 'https://quinnf.pythonanywhere.com/success',
+                cancel_url = 'https://quinnf.pythonanywhere.com/cancelled',
             )
-        
+
             return JsonResponse({'sessionId': session['id']})
-        
+
         except Exception as e:
             return JsonResponse({'error': str(e)})
 
@@ -169,6 +169,10 @@ def stripe_webhook(request):
     # Handle the checkout.session.completed event
     if event['type'] == 'checkout.session.completed':
         print("Payment was successful.")
-        # TODO: run some custom code here
+        session = stripe.checkout.Session.retrieve(
+          event['data']['object']['id'],
+          expand=['line_items'],
+        )
+        print(session.event.data)
 
     return HttpResponse(status=200)

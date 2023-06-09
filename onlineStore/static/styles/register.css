@@ -1,0 +1,83 @@
+/* Contains CSS Rules for elements in register.html*/
+.background-container{
+    background-image: url('../images/tech.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:center;
+    height: 100%;   
+}
+
+.form-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top:3%;
+    padding: 2%;
+    background-color: white;
+    border-radius: 4px;
+    color:hsl(216, 89%, 26%);
+    width: 40%;
+}
+
+.form-group p{
+    margin:1% 2%;
+}
+
+.form-group input{
+    display: block;
+    width: 100%;
+    padding:2%;
+}
+
+.form-group label{
+    display: block;
+    width: 100%;
+    font-size: large;
+    margin: 1% 0;
+    margin-bottom: 2%;
+}
+
+.submit-btn{
+    font-size: x-large;
+    background-color: #07377d;
+    color:#e3dbdb;
+    border: solid #07377d 1px;
+    border-radius: 4px;
+    margin:5% 2%; 
+    line-height: 2;
+    width: 96%;
+}
+
+.submit-btn:hover{
+    background-color:#e3dbdb;
+    color: #07377d;
+    border: solid #07377d 1px;
+    transition: background-color 0.3s, color 0.3s, border 0.3s;
+}
+
+span.helptext, .form-group li{
+    display: none;
+}
+
+.error-message{
+    margin-left:2%;
+    color:red;
+}
+
+@media screen and (max-width: 800px){
+    .form-group{
+        width:70%;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .form-group{
+        width:100%;
+    }
+}

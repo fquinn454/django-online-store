@@ -17,7 +17,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('account-info')
+            return redirect('showcart')
         else:
             context['form'] = form
     else:
@@ -30,4 +30,4 @@ def accountInfo(request):
         return render(request, 'account-info.html')
     else:
         return redirect('login')
-   
+

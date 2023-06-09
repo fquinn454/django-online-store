@@ -1,0 +1,105 @@
+/* Contains CSS Rules for elements in showProducts.html*/
+
+.product-container{
+    padding-top: 3%;
+    display: grid;
+    grid-template-columns: 7fr 4fr 1fr;
+    grid-gap: 20px;
+}
+
+.carousel {
+    margin-left: 4%;
+}
+
+.carousel-inner img{
+    width: auto;
+    height:400px;
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+  filter: invert(1);
+}
+
+.carousel-indicators {
+    filter: invert(1);
+}
+
+.carousel-item img{
+    margin:auto;
+    width: 100%;
+}
+
+form{
+    display: inline;
+}
+
+.breadcrumb-nav {
+    display: inline;
+}
+
+form button {
+    height:2rem;
+}
+
+.breadcrumb {
+    display: flex;
+    justify-content: flex-start;
+    margin-top:2%;
+    margin-left:2%;
+}
+
+.breadcrumb-item {
+    margin-right:0;
+    font-size: 1rem;
+}
+
+.breadcrumb-nav a {
+    color: #07377d;
+    margin-right:0;
+}
+.breadcrumb-nav a:active {
+    color:#736d6d;
+}
+
+@media screen and (max-width: 1000px){
+    .product-container {
+        grid-template-columns: 7fr 4fr 1fr;
+    }
+
+    .carousel-inner img{
+        height:300px;
+    }
+
+}
+
+
+@media screen and (max-width: 700px){
+    .product-container {
+        grid-template-columns: 1fr;
+    }
+
+    .product-info {
+        margin-left: 4%;
+        margin-right: 4%;
+    }
+
+    .carousel-inner img{
+        height:250px;
+    }
+
+    h2 {
+        margin-top: 3%;
+    }
+}
+
+@media screen and (max-width: 430px){
+    .carousel-inner img{
+        height:200px;
+    }
+
+    .breadcrumb-item {
+        font-size: 0.7rem;
+    }
+
+}

@@ -1,0 +1,117 @@
+/* Contains the common CSS rules for site */
+
+body{
+    background-color: white;
+}
+
+h2, h4, p, a, label, .dropdown-menu {
+    color:#07377d;
+}
+
+.dropdown-menu, .nav-bar {
+    background-color: #e7e5f7;
+}
+
+.logo{
+    min-width: 100px;
+    max-width: 15%;
+    height: auto;
+}
+
+button {
+    color:#e3dbdb;
+    background-color: #07377d;
+}
+
+button:hover {
+    background-color:#e3dbdb;
+    color: #07377d;
+}
+
+/* Nav */
+nav {
+    display:flex;
+    font-size: 1.2rem;
+    background-color: #e7e5f7;
+}
+
+nav li{
+    list-style: none;
+    margin-right:2%;
+}
+
+nav a{
+    margin-right:2rem;
+}
+
+nav a:hover {
+    color:#736d6d;
+    text-decoration-color: #736d6d;
+}
+
+.nav-links-left{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width:50%;
+}
+
+.nav-links-right{
+    margin-right:1%;
+    display: flex;
+    justify-content: flex-end;
+    width:50%;
+}
+
+.nav-links-right li{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Shows number of items in wishlist and cart */
+.badge{
+    background-color: #736d6d;
+    font-size: 12px;
+    color: #fff;
+    border-radius: 50%;
+    padding: 2px 5px;
+    position: relative;
+    left: -10px;
+    top: -28px;
+}
+
+/* hamburger icon for navigation menu on small screens */
+.nav-hamburger{
+    display: none;
+}
+
+@media screen and (max-width: 1200px){
+    nav {
+        font-size: 1.1rem;
+        line-height: 1;
+    }
+
+    .badge{
+        top: -25px;
+    }
+}
+
+/* Hamburger Navigation Menu on smaller screens*/
+@media screen and (max-width: 780px){
+    .nav-hamburger{
+        display:flex;
+        background-color: #e7e5f7;
+        width: 100%;
+        margin-right: 10px;
+        padding-bottom: 4%;
+        justify-content: flex-end;
+        list-style: none;
+    }
+
+    nav{
+        display: none;
+    }
+
+}

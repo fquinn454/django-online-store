@@ -1,0 +1,106 @@
+/* Contains CSS Rules for elements in products.html*/
+
+button {
+    height: 2rem;
+    border: #e3dbdb solid 1px;
+    margin-bottom:5%;
+}
+
+#products a{
+    color:#736d6d;
+    text-decoration: underline;
+    text-decoration-color: #736d6d;
+    cursor:default;
+    margin-bottom:3%;
+    opacity: 0.8;
+}
+
+.sidebar {
+    display: grid;
+    grid-template-columns: 1fr 11fr;
+    background-color:#fff;
+    position: relative;
+    height: 100%;
+}
+
+.filters a {
+    margin-top:10%;
+    margin-left: 10%;
+    display: block;
+}
+
+.products-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background-color: #fff;
+    margin:1% 2%;
+    height:fit-content;
+}
+
+.product {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid gray;
+    margin:1% 2%;
+}
+
+.product a{
+    display:flex;
+    justify-content: center;
+    text-align: center;
+    margin-bottom:4%;
+    width: 80%;
+}
+
+.product p{
+    margin-bottom:4%;
+}
+
+.thumbnail {
+    width: 80%;
+    margin-top:2%;
+    margin-bottom:4%;
+}
+
+@media screen and (max-width: 1450px) {
+    .sidebar {
+        display: grid;
+        grid-template-columns: 2fr 10fr;
+    }
+}
+
+
+@media screen and (max-width: 1000px) {
+    .sidebar {
+        display: grid;
+        grid-template-columns: 3fr 9fr;
+    }
+    .products-container{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 660px) {
+    .sidebar {
+        display: grid;
+        grid-template-columns: 4fr 8fr;
+    }
+
+    .products-container{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .sidebar {
+        display: grid;
+        grid-template-columns: 5fr 7fr;
+    }
+
+    .products-container{
+        grid-template-columns:  1fr;
+    }
+}
+
