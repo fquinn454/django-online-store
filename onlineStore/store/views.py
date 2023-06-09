@@ -169,10 +169,17 @@ def stripe_webhook(request):
     # Handle the checkout.session.completed event
     if event['type'] == 'checkout.session.completed':
         print("Payment was successful.")
+        print("hello friend")
         session = stripe.checkout.Session.retrieve(
           event['data']['object']['id'],
           expand=['line_items'],
         )
-        print(session.event.data)
+        print(session.customer_details.address.line1)
+        print(session.customer_details.address.line2)
+        print(session.customer_details.address.city)
+        print(session.customer_details.address.postal_code)
+        for item in session.line_items:
+            print(item.description)
+            print(item.price.unit_amount/100)
 
     return HttpResponse(status=200)
