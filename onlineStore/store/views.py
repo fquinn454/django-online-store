@@ -195,7 +195,7 @@ def stripe_webhook(request):
             )
             address.save()
 
-        order = Order.objects.create(
+        order = Order(
             profile=Profile.objects.get(user = session.client_reference_id),
             address = address
         )

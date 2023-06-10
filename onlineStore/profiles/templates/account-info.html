@@ -29,7 +29,7 @@
             <div class="info">
                 {% for order in orders %}
                     {% for productset in order.productsets.all %}
-                        <p>{{ productset.product.title }} x {{ productset.quantity }}</p>
+                        <p>{{order.date}} - {{ productset.product.title }} x {{ productset.quantity }}</p>
                     {% endfor %}
                 {% endfor %}
             </div>
