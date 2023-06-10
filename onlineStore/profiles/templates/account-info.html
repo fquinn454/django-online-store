@@ -27,6 +27,11 @@
             <h4 class="heading">My Orders</h4>
             <icon class="icon">{% icon 'orders' %}</icon>
             <div class="info">
+                {% for order in orders %}
+                    {% for productset in order.productsets.all %}
+                        <p>{{ productset.product.title }} x {{ productset.quantity }}</p>
+                    {% endfor %}
+                {% endfor %}
             </div>
             <button class="change">View</button>
         </div>

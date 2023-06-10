@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from .models import Product, Image
 from django.http import JsonResponse, HttpResponse
+from django.contrib.auth.models import User
 from profiles.models import Profile, ProductSet
 from address.models import Address
 from order.models import Order
@@ -171,21 +172,52 @@ def stripe_webhook(request):
     # Handle the checkout.session.completed event
     if event['type'] == 'checkout.session.completed':
         print("Payment was successful.")
-        print("hello friend")
         session = stripe.checkout.Session.retrieve(
           event['data']['object']['id'],
           expand=['line_items'],
         )
 
-        address = Address(
+        try:
+            address = Address.ojbects.get(
+                profile=Profile.objects.get(user = session.client_reference_id),
+                line1=session.customer_details.address.line1,
+                line2=session.customer_details.address.line2,
+                city=session.customer_details.address.city,
+                postal_code=session.customer_details.address.postal_code
+            )
+        except:
+            address = Address.objects.create(
+                profile=Profile.objects.get(user = session.client_reference_id),
+                line1=session.customer_details.address.line1,
+                line2=session.customer_details.address.line2,
+                city=session.customer_details.address.city,
+                postal_code=session.customer_details.address.postal_code
+            )
+            address.save()
+
+        order = Order.objects.create(
             profile=Profile.objects.get(user = session.client_reference_id),
-            line1=session.customer_details.address.line1,
-            line2=session.customer_details.address.line2,
-            city=session.customer_details.address.city,
-            postal_code=session.customer_details.address.postal_code
+            address = address
         )
-        address.save()
+        order.save()
+
+        for item in session.line_items:
+            try:
+                productSet = ProductSet.objects.get(
+                user=User.objects.get(id = session.client_reference_id),
+                product = Product.objects.get(title = item.description),
+                quantity = item.quantity
+            )
+            except:
+                productSet = ProductSet.objects.create(
+                user=User.objects.get(id = session.client_reference_id),
+                product = Product.objects.get(title = item.description),
+                quantity = item.quantity
+            )
+            order.productsets.add(productSet)
+            order.save()
+
+        return HttpResponse(status=200)
 
 
 
-    return HttpResponse(status=200)

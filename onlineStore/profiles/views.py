@@ -6,6 +6,7 @@ from django.contrib.auth import login
 from .forms import RegisterForm
 from .models import Profile
 from address.models import Address
+from order.models import Order
 
 load_dotenv()
 stripe.api_key = os.environ.get('STRIPE_SECRET_KEY')
@@ -28,9 +29,15 @@ def register(request):
 
 def accountInfo(request):
     if request.user.is_authenticated:
-        addresses=Address.objects.filter(profile = Profile.objects.get(user = request.user))
-
-        return render(request, 'account-info.html', {'addresses':addresses_to_use})
+        try:
+            addresses=Address.objects.filter(profile = Profile.objects.get(user = request.user))
+        except:
+            addresses=[]
+        try:
+            orders=Order.objects.filter(profile = Profile.objects.get(user = request.user))
+        except:
+            orders=[]
+        return render(request, 'account-info.html', {'addresses':addresses, 'orders':orders})
     else:
         return redirect('login')
 
