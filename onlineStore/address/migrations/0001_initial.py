@@ -10,17 +10,17 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('profiles', '0001_initial'),
-        ('address', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Order',
+            name='Address',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date', models.DateTimeField()),
-                ('address', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='address.address')),
-                ('productsets', models.ManyToManyField(to='profiles.productset')),
+                ('line1', models.CharField(max_length=100)),
+                ('line2', models.CharField(max_length=100)),
+                ('city', models.CharField(max_length=100)),
+                ('postal_code', models.CharField(max_length=100)),
                 ('profile', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='profiles.profile')),
             ],
         ),
