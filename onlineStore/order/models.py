@@ -9,7 +9,7 @@ class Order(models.Model):
     profile = models.ForeignKey(Profile, on_delete = models.CASCADE )
     address = models.ForeignKey(Address, on_delete=models.CASCADE)
     productsets = models.ManyToManyField(ProductSet)
-    date = models.DateTimeField()
+    date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return "Order Number: "+str(self.id)
