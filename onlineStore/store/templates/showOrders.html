@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load icons %}
+{# Load the tag library #}
+{% load bootstrap5 %}
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+
+{% block css %}
+    <link href="{% static 'styles/base.css' %}" rel="stylesheet" >
+    <link href="{% static 'styles/showOrders.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class=order-container>
+        <h4 >{{username}}'s Orders</h4>
+        <div>
+            {% for order in orders %}
+            <p><strong>Order #</strong>{{order.id}}</p>
+            <p><strong>Date: </strong>{{order.date}}</p>
+            <p><strong>Delivery Address: </strong>{{order.address}}</p>
+            <ul>
+                {% for productset in order.productsets.all %}
+                    <li>
+                      {{ productset.product.title }} (x {{ productset.quantity }})</p>
+                    </li>
+                {% endfor %}
+            </ul>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

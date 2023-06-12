@@ -4,11 +4,19 @@
 {% block css %}
     <link href="{% static 'styles/base.css' %}" rel="stylesheet" >
     <link href="{% static 'styles/index.css' %}" rel="stylesheet">
+    <link href="{% static 'styles/success.css' %}" rel="stylesheet">
 {% endblock %}
 {% block content %}
-  <section class="section">
-    <div class="container">
-      <p>Your payment succeeded.</p>
+    <div class="success-container">
+      <p>Payment successful</p><br>
+      <strong>Date: </strong>{{order.date}}<br>
+      <strong>Order </strong>#{{order.id}}<br>
+      <strong>Delivery address: </strong> {{order.address}}<br>
+      <strong>Ordered items:</strong>
+      <ul>
+      {% for productset in order.productsets.all %}
+        <li>{{productset.product.title}} (x{{productset.quantity}}) <strong>Unit price: </strong>£{{productset.product.price}}</li>
+      {% endfor %}
+      </ul>
     </div>
-  </section>
 {% endblock %}

@@ -145,7 +145,17 @@ def create_checkout_session(request):
             return JsonResponse({'error': str(e)})
 
 def success(request):
-    return render(request, "success.html")
+    profile = Profile.objects.get(user = request.user)
+    orders = Order.objects.filter(profile = profile).order_by('date')
+    order = orders[0]
+    return render(request, "success.html", {'order': order})
+
+def showOrders(request):
+    profile = Profile.objects.get(user = request.user)
+    orders = Order.objects.filter(profile = profile)
+    username = request.user.username
+    context = {'profile':profile, 'orders':orders, 'username':username}
+    return render(request, "showOrders.html", context)
 
 def cancelled(request):
     return render(request, "cancelled.html")

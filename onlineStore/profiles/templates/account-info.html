@@ -28,12 +28,14 @@
             <icon class="icon">{% icon 'orders' %}</icon>
             <div class="info">
                 {% for order in orders %}
-                    {% for productset in order.productsets.all %}
-                        <p>{{order.date}} - {{ productset.product.title }} x {{ productset.quantity }}</p>
-                    {% endfor %}
+                    <p><strong>Order #</strong>{{order.id}}  <strong>Date: </strong>{{order.date}} <strong>Items: </strong>{{order.productsets.all.count}}</p>
                 {% endfor %}
             </div>
-            <button class="change">View</button>
+            <form action="{% url 'showOrders' %}" method="get">
+                {% csrf_token %}
+                <button class="change">View</button>
+             </form>
+
         </div>
         <div class="details">
             <h4 class="heading">My Addresses</h4>
