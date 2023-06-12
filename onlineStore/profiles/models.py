@@ -14,6 +14,7 @@ class ProductSet(models.Model):
     product = models.ForeignKey(Product, on_delete = models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
 
+
     def __str__(self):
         return self.product.title+" x "+str(self.quantity)
 
@@ -47,11 +48,11 @@ class ProductSet(models.Model):
             product = Product.objects.get(id = product_id)
             try:
                 productset = ProductSet.objects.get(user = request.user, product = product)
-                productset.quantity = 1
-                productset.save()
                 profile.cart.add(productset)
             except:
-                profile.cart.add(ProductSet.objects.create(user = request.user, product = product))
+                productset = ProductSet.objects.create(user = request.user, product = product, quantity=1)
+                productset.save()
+                profile.cart.add(productset)
         else:
             cart = request.session.get('cart', [])
             if len(cart) > 0:
@@ -87,18 +88,31 @@ class ProductSet(models.Model):
     def sumCart(request):
         if request.user.is_authenticated:
             profile = Profile.objects.get(user = request.user)
-            productsets = profile.cart.all()
-            sum = 0
-            for productset in productsets:
-                sum += productset.product.price * 1
-            return sum
+            if profile.first_login == True:
+                cart = request.session.get('cart', [])
+
+                if cart:
+                    sum = 0
+                    for item in cart:
+                        product = Product.objects.get(id = item[0])
+                        sum += product.price * 1
+                    profile.first_login = False
+                    profile.save()
+                    return sum
+
+            else:
+                productsets = profile.cart.all()
+                sum = 0
+                for productset in productsets:
+                    sum += productset.product.price * productset.quantity
+                return sum
         else:
             cart = request.session.get('cart', [])
             if cart:
                 sum = 0
                 for item in cart:
                     product = Product.objects.get(id = item[0])
-                    sum += product.price * item[1]
+                    sum += product.price * 1
                 return sum
 
     def increment(request, product_id):
@@ -139,6 +153,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     wishlist = models.ManyToManyField(Product, related_name='wishlist', blank=True)
     cart = models.ManyToManyField(ProductSet, related_name='cart', blank=True)
+    first_login = models.BooleanField(default = True)
 
     # return user.username
     def __str__(self):

@@ -178,27 +178,29 @@ def stripe_webhook(request):
         )
 
         try:
-            address = Address.ojbects.get(
-                profile=Profile.objects.get(user = session.client_reference_id),
-                line1=session.customer_details.address.line1,
-                line2=session.customer_details.address.line2,
-                city=session.customer_details.address.city,
-                postal_code=session.customer_details.address.postal_code
-            )
-        except:
-            address = Address.objects.create(
-                profile=Profile.objects.get(user = session.client_reference_id),
-                line1=session.customer_details.address.line1,
-                line2=session.customer_details.address.line2,
-                city=session.customer_details.address.city,
-                postal_code=session.customer_details.address.postal_code
-            )
-            address.save()
+            addresses = Address.objects.filter(profile = Profile.objects.get(user = User.objects.get(id = session.client_reference_id)))
+            for item in addresses:
+                if item.line1 == session.customer_details.address.line1:
+                    order_address_to_save = item
 
-        order = Order(
-            profile=Profile.objects.get(user = session.client_reference_id),
-            address = address
+            order_address = order_address_to_save
+
+        except:
+            order_address = Address.objects.create(
+                profile=Profile.objects.get(user = session.client_reference_id),
+                line1=session.customer_details.address.line1,
+                line2=session.customer_details.address.line2,
+                city=session.customer_details.address.city,
+                postal_code=session.customer_details.address.postal_code
+            )
+
+            order_address.save()
+
+        order = Order.objects.create(
+            profile=Profile.objects.get(user = User.objects.get(id = session.client_reference_id)),
+            address = order_address
         )
+
         order.save()
 
         for item in session.line_items:
@@ -216,6 +218,9 @@ def stripe_webhook(request):
             )
             order.productsets.add(productSet)
             order.save()
+
+        profile=Profile.objects.get(user = User.objects.get(id = session.client_reference_id))
+        profile.cart.clear()
 
         return HttpResponse(status=200)
 
