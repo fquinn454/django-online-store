@@ -59,14 +59,21 @@ h4{
 .info p{
     margin: 1% 0;
 }
+
 .change {
+    display:flex;
+    align-items:flex-end;
     grid-area: d;
 }
 
 button{
-   align-self: end;
-   height:50%;
-   margin:3%;
+    width: 90%;
+    margin: 0 auto;
+    height: 2.5rem;
+}
+
+form{
+    margin-block-end:3%;
 }
 
 .account-container a{

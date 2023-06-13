@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load icons %}
+{# Load the tag library #}
+{% load bootstrap5 %}
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+
+{% block css %}
+    <link href="{% static 'styles/base.css' %}" rel="stylesheet" >
+    <link href="{% static 'styles/showAddresses.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class=address-container>
+        <h4 >{{username}}'s Addresses</h4>
+        <br>
+        <div>
+            {% for address in addresses %}
+            <p>{{address}}</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

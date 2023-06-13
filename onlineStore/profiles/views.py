@@ -34,7 +34,7 @@ def accountInfo(request):
         except:
             addresses=[]
         try:
-            orders=Order.objects.filter(profile = Profile.objects.get(user = request.user))
+            orders=Order.objects.filter(profile = Profile.objects.get(user = request.user)).order_by('-id')
         except:
             orders=[]
         return render(request, 'account-info.html', {'addresses':addresses, 'orders':orders})

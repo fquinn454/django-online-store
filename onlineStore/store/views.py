@@ -146,16 +146,22 @@ def create_checkout_session(request):
 
 def success(request):
     profile = Profile.objects.get(user = request.user)
-    orders = Order.objects.filter(profile = profile).order_by('date')
+    orders = Order.objects.filter(profile = profile).order_by('-id')
     order = orders[0]
     return render(request, "success.html", {'order': order})
 
 def showOrders(request):
     profile = Profile.objects.get(user = request.user)
-    orders = Order.objects.filter(profile = profile)
+    orders = Order.objects.filter(profile = profile).order_by('-id')
     username = request.user.username
     context = {'profile':profile, 'orders':orders, 'username':username}
     return render(request, "showOrders.html", context)
+
+def showAddresses(request):
+    addresses = Address.objects.filter(profile = Profile.objects.get(user = request.user))
+    username = request.user.username
+    context = {'addresses':addresses, 'username':username}
+    return render(request, "showAddresses.html", context)
 
 def cancelled(request):
     return render(request, "cancelled.html")

@@ -7,3 +7,8 @@
 .order-container h4{
     margin-bottom: 1%;
 }
+
+.order-items li{
+    display:grid;
+    grid-template-columns: 3fr 2fr 2fr 5fr;
+}
