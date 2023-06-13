@@ -25,23 +25,25 @@
     </div>
   </div>
   <div class="products-container">
-    {% for product in products %}
-      <div class="product" id='{{ product.id }}'>
-          <a href="{% url 'showProduct' product_id=product.id %}"><img class="thumbnail" style="height:120px; width:180px;" src= '{{ product.thumbnail }} '></a>
-          <a href="{% url 'showProduct' product_id=product.id %}"><strong>{{ product.title }}</strong></a>
-          <p class="price">Price £{{ product.price }}</p>
-          <div class="btn-toolbar">
-            <form action="{% url 'addToCart' product_id=product.id %}" method="post">
-              {% csrf_token %}
-              <button type="submit">Add&nbsp;To&nbsp;Cart</button>
-            </form>
-            <form action="{% url 'addFavourite' product_id=product.id %}" method="post">
-              {% csrf_token %}
-              <button type="submit">{% icon 'heart-small' %}</button>
-            </form>
-          </div>
-      </div> 
-    {% endfor %}
+        {% for product in products %}
+            {% if product.stock %}
+              <div class="product" id='{{ product.id }}'>
+                  <a href="{% url 'showProduct' product_id=product.id %}"><img class="thumbnail" style="height:120px; width:180px;" src= '{{ product.thumbnail }} '></a>
+                  <a href="{% url 'showProduct' product_id=product.id %}"><strong>{{ product.title }}</strong></a>
+                  <p class="price">Price £{{ product.price }}</p>
+                  <div class="btn-toolbar">
+                    <form action="{% url 'addToCart' product_id=product.id %}" method="post">
+                      {% csrf_token %}
+                      <button type="submit">Add&nbsp;To&nbsp;Cart</button>
+                    </form>
+                    <form action="{% url 'addFavourite' product_id=product.id %}" method="post">
+                      {% csrf_token %}
+                      <button type="submit">{% icon 'heart-small' %}</button>
+                    </form>
+                  </div>
+              </div>
+            {% endif %}
+        {% endfor %}
   </div>
 </div>
 {% endblock %}

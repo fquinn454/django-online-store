@@ -1,8 +1,8 @@
 #account a, #account label{
+    pointer-events: none;
     color:#736d6d;
     text-decoration: underline;
     text-decoration-color: #736d6d;
-    cursor:default;
     margin-bottom:3%;
     opacity: 0.8;
 }
@@ -25,12 +25,15 @@ h4{
 
 .account h4{
    text-align: center;
+   margin-bottom: 3%;
+   margin-top:1%;
+
 }
 
 .account {
     margin:2%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     column-gap: 1rem;
     row-gap: 1rem;
 }
@@ -38,22 +41,27 @@ h4{
 .details{
     display: grid;
     grid-template-columns: 2fr 8fr 2fr;
-    grid-template-rows: 3rem 6rem;
     border: solid black 1px;
-    grid-template-areas:
-    "a a a "
-    "b c d";
+}
+
+#order-info {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
 }
 
 .heading {
-    grid-area: a;
+    grid-column: 1/4;
+    grid-row: 1;
 }
 .icon {
-    grid-area: b;
+    grid-column: 1;
+    grid-row: 2;
     text-align: center;
+    margin-right: 10px;
 }
 .info {
-    grid-area: c;
+    grid-column:2;
+    grid-row: 2
 }
 
 .info p{
@@ -61,9 +69,10 @@ h4{
 }
 
 .change {
+    grid-column: 3;
+    grid-row: 2/4;
     display:flex;
     align-items:flex-end;
-    grid-area: d;
 }
 
 button{
@@ -80,8 +89,22 @@ form{
     margin-left: 0.5%;
 }
 
-@media only screen and (max-width: 900px) {
+
+@media only screen and (max-width: 500px) {
+    #order-info {
+        margin-bottom: 1rem;
+        grid-template-columns: 1fr;
+    }
+}
+
+@media only screen and (max-width: 980px) {
     .account{
         grid-template-columns: 1fr;
+    }
+
+    .account h4{
+        margin-top: 3%;
+        margin-bottom: 5%;
+
     }
 }

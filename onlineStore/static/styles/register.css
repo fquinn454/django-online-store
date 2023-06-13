@@ -1,11 +1,5 @@
 /* Contains CSS Rules for elements in register.html*/
-.background-container{
-    background-image: url('../images/tech.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position:center;
-    height: 100%;   
-}
+
 
 .form-container{
     display: flex;
@@ -33,14 +27,14 @@
     display: block;
     width: 100%;
     padding:2%;
+
+
 }
 
 .form-group label{
     display: block;
     width: 100%;
     font-size: large;
-    margin: 1% 0;
-    margin-bottom: 2%;
 }
 
 .submit-btn{
@@ -49,9 +43,7 @@
     color:#e3dbdb;
     border: solid #07377d 1px;
     border-radius: 4px;
-    margin:5% 2%; 
     line-height: 2;
-    width: 96%;
 }
 
 .submit-btn:hover{
@@ -70,6 +62,13 @@ span.helptext, .form-group li{
     color:red;
 }
 
+
+@media screen and (max-width: 1500px){
+    .form-group input{
+        margin:0;
+    }
+}
+
 @media screen and (max-width: 800px){
     .form-group{
         width:70%;
@@ -80,4 +79,6 @@ span.helptext, .form-group li{
     .form-group{
         width:100%;
     }
+
+
 }

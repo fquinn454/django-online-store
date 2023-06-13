@@ -15,7 +15,7 @@
       <strong>Ordered items:</strong>
       <ul>
       {% for productset in order.productsets.all %}
-        <li>{{productset.product.title}} (x{{productset.quantity}}) <strong>Unit price: </strong>£{{productset.product.price}}</li>
+        <li><span>{{productset.product.title}} (x{{productset.quantity}})</span> <span>Unit price: £{{productset.product.price}}</span>Total price: £{{productset.getTotalCost}}<span></span></li>
       {% endfor %}
       </ul>
     </div>

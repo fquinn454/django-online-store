@@ -1,6 +1,6 @@
 .order-container{
     border: 1px solid black;
-    margin: 3%;
+    margin: 2%;
     padding: 2%;
 }
 
@@ -11,4 +11,12 @@
 .order-items li{
     display:grid;
     grid-template-columns: 3fr 2fr 2fr 5fr;
+}
+
+@media screen and (max-width: 900px){
+    .order-items li{
+        display: grid;
+        grid-template-columns: 3fr 2fr 2fr;
+        margin-bottom:5%;
+    }
 }

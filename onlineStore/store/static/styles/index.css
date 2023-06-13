@@ -2,10 +2,10 @@
 /* Contains CSS Rules for elements in index.html*/
 
 #home a{
+    pointer-events: none;
     color:#736d6d;
     text-decoration: underline;
     text-decoration-color: #736d6d;
-    cursor:default;
     opacity: 0.8;
 }
 
@@ -27,11 +27,11 @@
 }
 
 button {
-    width: fit-content;
-    height:40px;
+    width: 100%;
+    padding: 10;
     text-decoration: none;
     text-align: center;
-    font-size:1rem;
+    font-size:1.5rem;
     border-radius: 4px;
 }
 

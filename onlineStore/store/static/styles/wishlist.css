@@ -1,8 +1,8 @@
 #wish-list label, #wish-list a{
+    pointer-events: none;
     color:#736d6d;
     text-decoration: underline;
     text-decoration-color: #736d6d;
-    cursor:default;
     opacity: 0.8;
 }
 
@@ -31,7 +31,8 @@ h2{
     grid-template-columns: 1fr 1fr 2fr 1fr 1fr;
     justify-content: flex-end;
     align-items: center;
-    margin: 2%;
+    margin: 1%;
+    margin-right: 2%;
 }
 
 .product img {
@@ -40,7 +41,7 @@ h2{
 }
 
 .product a{
-    color: #07377d; 
+    color: #07377d;
     text-align: center;
 }
 

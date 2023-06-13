@@ -89,12 +89,12 @@ nav a:hover {
 
 @media screen and (max-width: 1200px){
     nav {
-        font-size: 1.1rem;
+        font-size: 1rem;
         line-height: 1;
     }
 
     .badge{
-        top: -25px;
+        top: -20px;
     }
 }
 
@@ -104,7 +104,6 @@ nav a:hover {
         display:flex;
         background-color: #e7e5f7;
         width: 100%;
-        margin-right: 10px;
         padding-bottom: 4%;
         justify-content: flex-end;
         list-style: none;
@@ -112,6 +111,10 @@ nav a:hover {
 
     nav{
         display: none;
+    }
+
+    .dropdown{
+        margin-right:1%;
     }
 
 }

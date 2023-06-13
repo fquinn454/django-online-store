@@ -13,6 +13,7 @@
     <div class="account">
         <div class="details">
             <h4 class="heading">My Details</h4>
+            <br>
             <div class="icon">
                 <icon>{% icon 'account' %}</icon>
             </div>
@@ -28,10 +29,11 @@
         </div>
         <div class="details">
             <h4 class="heading">My Orders</h4>
+            <br>
             <icon class="icon">{% icon 'orders' %}</icon>
             <div class="info">
                 {% for order in orders %}
-                    <p><strong>Order #</strong>{{order.id}}  <strong>Date: </strong>{{order.date}} <strong>Items: </strong>{{order.productsets.all.count}}</p>
+                    <p id="order-info"><span><strong>Order #</strong>{{order.id}}</span><span><strong>Date: </strong>{{order.date}}</span><span><strong>Items: </strong>{{order.productsets.all.count}}</span></p>
                 {% endfor %}
             </div>
             <form class="change" action="{% url 'showOrders' %}" method="get">
@@ -42,6 +44,7 @@
         </div>
         <div class="details">
             <h4 class="heading">My Addresses</h4>
+            <br>
             <icon class="icon">{% icon 'address' %}</icon>
             <div class="info">
                 {% for address in addresses %}

@@ -220,18 +220,26 @@ def stripe_webhook(request):
         order.save()
 
         for item in session.line_items:
+
+            user=User.objects.get(id = session.client_reference_id)
+            product = Product.objects.get(title = item.description)
+            quantity = item.quantity
+
             try:
                 productSet = ProductSet.objects.get(
-                user=User.objects.get(id = session.client_reference_id),
-                product = Product.objects.get(title = item.description),
-                quantity = item.quantity
+                user=user,
+                product = product,
+                quantity = quantity
             )
+
             except:
                 productSet = ProductSet.objects.create(
-                user=User.objects.get(id = session.client_reference_id),
-                product = Product.objects.get(title = item.description),
-                quantity = item.quantity
+                user=user,
+                product = product,
+                quantity = quantity
             )
+            product.stock -= 1
+            product.save()
             order.productsets.add(productSet)
             order.save()
 

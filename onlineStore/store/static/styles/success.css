@@ -1,5 +1,5 @@
 .success-container{
-    width: 90%;
+    width: 98%;
     border:solid black 1px;
     margin: 1% auto;
     padding: 2%;
@@ -7,4 +7,19 @@
 
 .right{
     text-align:right;
+}
+
+.success-container li{
+    display: grid;
+    grid-template-columns: 3fr 2fr 2fr 5fr;
+}
+
+@media screen and (max-width: 900px){
+    .success-container li{
+        display: grid;
+        grid-template-columns: 3fr 2fr 2fr;
+        margin-bottom:5%;
+    }
+
+
 }

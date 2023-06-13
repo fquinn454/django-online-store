@@ -7,10 +7,10 @@ button {
 }
 
 #products a{
+    pointer-events: none;
     color:#736d6d;
     text-decoration: underline;
     text-decoration-color: #736d6d;
-    cursor:default;
     margin-bottom:3%;
     opacity: 0.8;
 }
