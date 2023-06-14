@@ -3,7 +3,11 @@
 - Stripe API
   - Stripe Checkout
   - Stripe Retrieve Checkout
-  - Stripe Webhooks 
+  - Stripe Webhooks
+    - checkout.session.async_payment_failed
+    - checkout.session.async_payment_succeeded
+    - checkout.session.completed
+    - checkout.session.expired  
 - Django
   - Models
   - Views
