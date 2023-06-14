@@ -39,6 +39,8 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = "showcart"
 LOGOUT_REDIRECT_URL = "/"
 
+
+
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -52,7 +54,7 @@ INSTALLED_APPS = [
     'django_icons',
     'store',
     'profiles',
-    'order', 
+    'order',
     'address',
 ]
 

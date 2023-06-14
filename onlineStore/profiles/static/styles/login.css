@@ -9,10 +9,12 @@
     opacity: 0.8;
 }
 
-
-.form-container{
-    flex-direction: column;
-    justify-content: center;
-    margin-top:4%;
+form a {
+    display: block;
+    margin-bottom: 5%;
+    text-align:center;
 }
 
+form p:first-of-type{
+    text-align:center;
+}

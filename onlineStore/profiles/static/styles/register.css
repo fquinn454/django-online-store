@@ -1,52 +1,46 @@
 /* Contains CSS Rules for elements in register.html*/
 
-
 .form-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display:grid;
+    grid-template-columns: 2fr 3fr 2fr;
+    grid-template-rows: 1fr 5fr;
 }
 
-.form-group{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-top:3%;
-    padding: 2%;
+form{
+    grid-column: 2;
+    grid-row: 2;
+    margin: 0 auto;
     background-color: white;
     border-radius: 4px;
     color:hsl(216, 89%, 26%);
-    width: 40%;
+    width:98%;
+    margin: 1%;
 }
 
-.form-group p{
-    margin:1% 2%;
-}
 
-.form-group input{
+form input{
     display: block;
-    width: 100%;
-    padding:2%;
-
-
+    margin: 1% 0;
+    width:98%;
+    line-height: 2;
 }
 
-.form-group label{
+form label{
     display: block;
-    width: 100%;
-    font-size: large;
+    width:98%;
 }
 
-.submit-btn{
-    font-size: x-large;
+button {
     background-color: #07377d;
     color:#e3dbdb;
     border: solid #07377d 1px;
     border-radius: 4px;
-    line-height: 2;
+    float:right;
+    margin-right: 2%;
+    font-size:1.3rem;
 }
 
-.submit-btn:hover{
+button:hover{
     background-color:#e3dbdb;
     color: #07377d;
     border: solid #07377d 1px;
@@ -63,22 +57,14 @@ span.helptext, .form-group li{
 }
 
 
-@media screen and (max-width: 1500px){
-    .form-group input{
-        margin:0;
-    }
-}
-
-@media screen and (max-width: 800px){
-    .form-group{
-        width:70%;
-    }
-}
-
 @media screen and (max-width: 500px){
-    .form-group{
-        width:100%;
+    .form-container {
+        grid-template-columns: 1fr;
     }
 
-
+    form{
+        grid-column:1;
+    }
 }
+
+

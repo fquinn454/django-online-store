@@ -238,7 +238,7 @@ def stripe_webhook(request):
                 product = product,
                 quantity = quantity
             )
-            product.stock -= 1
+            product.stock -= quantity
             product.save()
             order.productsets.add(productSet)
             order.save()

@@ -9,10 +9,11 @@
 
 {% block content %}
   <div class="form-container">
-    <h2>Log In</h2>
-    <br>
-    <a href = "{% url 'register' %}">Don't have an account? Sign up here</a>
+
     <form method="post" class="form-group">
+      <h2>Log In</h2>
+      <p>Don't have an account? </p>
+      <a href = "{% url 'register' %}">Sign up here</a>
       {% csrf_token %}
       {{ form.as_p }}
       <button type="submit" class="submit-btn">Log In</button>

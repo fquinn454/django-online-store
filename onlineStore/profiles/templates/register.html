@@ -7,22 +7,21 @@
 {% endblock %}
 
 {% block content %}
-<div class="background-container">
-    <div class="form-container">
-        <form method="POST" class="form-group">
-            <h2>Register</h2>
-            {% csrf_token %}
-            {% for field in form %}
-                <p>{{ field.label_tag }}</p>
-                <p>{{ field }}</p>
-                {% for error in field.errors %}
-                    <div class="error-message">
-                        {{ error }}
-                    </div>
-                {% endfor %}
+<div class="form-container">
+    <form method="POST" >
+        <h2>Register</h2>
+        {% csrf_token %}
+        {% for field in form %}
+            <p>{{ field.label_tag }}<p>
+            <p>{{ field }}</p>
+            {% for error in field.errors %}
+                <div class="error-message">
+                    <p>{{ error }}</p>
+                </div>
             {% endfor %}
-            <button type="submit" class="submit-btn">Register</button>
-        </form>
-    </div>
+        {% endfor %}
+        <button type="submit" class="submit-btn">Register</button>
+    </form>
 </div>
+
 {% endblock %}
