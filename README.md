@@ -36,4 +36,4 @@
 - User Authentication
   - TODO - Allow user to change email, username and password 
 
-![Online Store Demo](quiz-game-demo.gif)
+![Online Store Demo](online-store-demo.gif)
