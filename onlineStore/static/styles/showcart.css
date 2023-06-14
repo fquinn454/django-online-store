@@ -38,19 +38,38 @@ button {
   width:100%;
 }
 
-@media screen and (max-width: 780px){
-    .product{
-        grid-template-columns: 1fr 1fr;
+@media screen and (max-width: 550px){
+
+    h2 {
+        margin-bottom:5%;
     }
 
-    .product-total{
-        grid-template-columns: 1fr 1fr;
+    .product{
+        grid-template-columns: 1fr;
+        margin-bottom: 2%;
+        border-bottom: #736d6d solid 1px;
+    }
+
+    .product.total{
+        grid-template-columns: repeat(3, 1fr);
+        border-top:none;
     }
 
     #submitBtn{
-        grid-column: 2;
+        width: auto;
+        grid-column: 3;
+        margin-right:;
     }
 
+    #quantity button{
+        height:25px;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .product{
+        margin-bottom:4%;
+    }
 }
 
 #quantity {
