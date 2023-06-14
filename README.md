@@ -9,6 +9,8 @@
 - HTML5
 - CSS
 - Bootstrap5
+- JavaScript
+
 
 
 ### Features
