@@ -21,7 +21,7 @@
 
 ### Features
 - Checkout with Stripe
-- Checkout success
+- Checkout success page with detailed order summary
 - Product info page with Bootsrap image carousel
 - Breadcrumbs
 - Landing Page
