@@ -33,3 +33,5 @@
 - Account section with 
   - Every order made by user previously
   - Every address used by user previously
+- User Authentication
+  - TODO - Allow user to change email, username and password 
