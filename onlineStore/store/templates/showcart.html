@@ -39,7 +39,11 @@
                       <button type="submit">{% icon 'trash' %}</button>
                   </form>
                 </div>
+
               </div>
+                {% if productset.message %}
+                    <p>Only {{ productset.product.stock }} left in stock!</p>
+                {% endif %}
             </div>
         {% endfor %}
         <div class="product total">

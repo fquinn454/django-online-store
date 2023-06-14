@@ -13,6 +13,7 @@ class ProductSet(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE )
     product = models.ForeignKey(Product, on_delete = models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
+    message = models.BooleanField(default=False)
 
 
     def __str__(self):
@@ -121,15 +122,15 @@ class ProductSet(models.Model):
             product = Product.objects.get(id = product_id)
             productsets = profile.cart.all()
             productset = productsets.get(user = request.user, product = product)
-            productset.quantity += 1
-            productset.save()
-        else:
-            cart = request.session.get('cart', [])
-            for item in cart:
-                if item[0] == int(product_id):
-                    item[1] += 1
-                    request.session['cart'] = cart
-                    request.session.save()
+            if product.stock > productset.quantity + 1:
+                productset.quantity += 1
+                productset.save()
+            elif product.stock == productset.quantity + 1:
+                productset.message = True;
+                productset.quantity += 1
+                productset.save()
+            else:
+                pass
 
     def decrement(request, product_id):
         if request.user.is_authenticated:
@@ -140,14 +141,9 @@ class ProductSet(models.Model):
             if productset.quantity > 1:
                 productset.quantity -= 1
                 productset.save()
-        else:
-            cart = request.session.get('cart', [])
-            for item in cart:
-                if item[0] == int(product_id):
-                    if item[1] > 1:
-                        item[1] -= 1
-                        request.session['cart'] = cart
-                        request.session.save()
+                if product.stock > productset.quantity:
+                    productset.message = False;
+                    productset.save()
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

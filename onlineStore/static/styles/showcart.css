@@ -32,7 +32,6 @@ button {
   display:grid;
   grid-template-columns: 3fr 2fr 2fr 5fr;
   width:90%;
-  height: 3rem;
 }
 
 .product p{
@@ -41,8 +40,15 @@ button {
 
 @media screen and (max-width: 780px){
     .product{
-        grid-template-columns: 6fr 3fr 3fr;
-        height:4rem;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .product-total{
+        grid-template-columns: 1fr 1fr;
+    }
+
+    #submitBtn{
+        grid-column: 2;
     }
 
 }
