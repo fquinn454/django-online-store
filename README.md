@@ -9,7 +9,7 @@ Try the site yourself - [Fiona's Online Store](https://quinnf.pythonanywhere.com
 | - Stripe API | - Checkout with Stripe |
  | - Stripe Checkout |
   | - Stripe Retrieve Checkout |
-   |- Stripe Webhooks |
+   | Stripe Webhooks |
     | - checkout.session.async_payment_failed |             
     | - checkout.session.async_payment_succeeded |
     | - checkout.session.completed |
