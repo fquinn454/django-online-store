@@ -9,11 +9,7 @@ Try the site yourself - [Fiona's Online Store](https://quinnf.pythonanywhere.com
 | Stripe API | Checkout with Stripe |
  | Stripe Checkout |
   | Stripe Retrieve Checkout |
-   | Stripe Webhooks<br> |
-    | - checkout.session.async_payment_failed<br> |             
-    | - checkout.session.async_payment_succeeded<br> |
-    | - checkout.session.completed<br> |
-    | - checkout.session.expired<br> |
+   | Stripe Webhooks<br>- checkout.session.async_payment_failed<br>- checkout.session.async_payment_succeeded<br>-checkout.session.completed<br>-checkout.session.expired<br> |
 | - Django |
     - Models 
     - Views
