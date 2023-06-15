@@ -9,7 +9,7 @@ Try the site yourself - [Fiona's Online Store](https://quinnf.pythonanywhere.com
 | Stripe API <br> Stripe Checkout <br> Stripe Retrieve Checkout <br> Stripe Webhooks<br> - checkout.session.async_payment_failed<br> - checkout.session.async_payment_succeeded<br> - checkout.session.completed<br> - checkout.session.expired
 Django <br> - Models<br> - Views <br> - Templates Python <br> HTML5 <br> CSS3 <br>
 Bootstrap5 <br> JavaScript <br> MySQL <br> Django Icons <br>
-<br> Python Anywhere <br> - Web hosting <br> - Bash <br> - Database Backup | | 
+Python Anywhere <br> - Web hosting <br> - Bash <br> - Database Backup | | 
 
 Try the site yourself - [Fiona's Online Store](https://quinnf.pythonanywhere.com/)
 
