@@ -1,4 +1,4 @@
-# django-online-store 
+# Online Store
 
 ![Online Store Demo](online-store-demo.gif)
 
