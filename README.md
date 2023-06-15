@@ -6,8 +6,8 @@ Try the site yourself - [Fiona's Online Store](https://quinnf.pythonanywhere.com
 
 | Tools | Features |
 | --- | --- | 
-| Stripe API <br> Stripe Checkout <br> Stripe Retrieve Checkout <br> Stripe Webhooks<br> - checkout.session.async_payment_failed<br> - checkout.session.async_payment_succeeded<br> - checkout.session.completed<br> - checkout.session.expired<br> <br> 
-<br> Django <br> - Models<br> - Views <br> - Templates | Python | HTML5 | CSS3 | 
+| Stripe API <br> Stripe Checkout <br> Stripe Retrieve Checkout <br> Stripe Webhooks<br> - checkout.session.async_payment_failed<br> - checkout.session.async_payment_succeeded<br> - checkout.session.completed<br> - checkout.session.expired<br>
+Django <br> - Models<br> - Views <br> - Templates <br>Python <br> HTML5 <br> CSS3 <br>
 <br> Bootstrap5 <br> JavaScript <br> MySQL <br> Django Icons <br>
 <br> Python Anywhere <br> - Web hosting <br> - Bash <br> - Database Backup | | 
 
