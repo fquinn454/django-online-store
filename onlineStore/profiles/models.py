@@ -33,7 +33,7 @@ class ProductSet(models.Model):
             productsets = []
             if cart:
                 for item in cart:
-                    product = Product.objects.get(id = item[0])
+                    product = Product.objects.get(id = item)
                     productset = {'product': product, 'quantity': item[1] }
                     cost = product.price * item[1]
                     productset['getTotalCost'] = cost
@@ -57,16 +57,12 @@ class ProductSet(models.Model):
         else:
             cart = request.session.get('cart', [])
             if len(cart) > 0:
-                products = []
-                for item in cart:
-                    products.append(int(item[0]))
-
-                if int(product_id) not in products:
-                    cart.append((int(product_id), int(1)))
+                if int(product_id) not in cart:
+                    cart.append(int(product_id))
                     request.session['cart'] = cart
                     request.session.save()
             else:
-                cart.append((int(product_id), int(1)))
+                cart.append(int(product_id))
                 request.session['cart'] = cart
                 request.session.save()
 
@@ -89,18 +85,17 @@ class ProductSet(models.Model):
     def sumCart(request):
         if request.user.is_authenticated:
             profile = Profile.objects.get(user = request.user)
-            if profile.first_login == True:
-                cart = request.session.get('cart', [])
+            cart = request.session.get('cart', [])
+            if cart:
+                sum = 0
+                for item in cart:
+                    product = Product.objects.get(id = item)
+                    sum += product.price * 1
 
-                if cart:
-                    sum = 0
-                    for item in cart:
-                        product = Product.objects.get(id = item[0])
-                        sum += product.price * 1
-                    profile.first_login = False
-                    profile.save()
-                    return sum
-
+                productsets = profile.cart.all()
+                for productset in productsets:
+                    sum += productset.product.price * productset.quantity
+                return sum
             else:
                 productsets = profile.cart.all()
                 sum = 0
@@ -112,7 +107,7 @@ class ProductSet(models.Model):
             if cart:
                 sum = 0
                 for item in cart:
-                    product = Product.objects.get(id = item[0])
+                    product = Product.objects.get(id = item)
                     sum += product.price * 1
                 return sum
 
@@ -126,11 +121,12 @@ class ProductSet(models.Model):
                 productset.quantity += 1
                 productset.save()
             elif product.stock == productset.quantity + 1:
-                productset.message = True;
+                productset.message = True
                 productset.quantity += 1
                 productset.save()
             else:
-                pass
+                productset.message = True
+                productset.save()
 
     def decrement(request, product_id):
         if request.user.is_authenticated:
@@ -149,7 +145,6 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     wishlist = models.ManyToManyField(Product, related_name='wishlist', blank=True)
     cart = models.ManyToManyField(ProductSet, related_name='cart', blank=True)
-    first_login = models.BooleanField(default = True)
 
     # return user.username
     def __str__(self):
