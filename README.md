@@ -4,12 +4,13 @@ Try the site yourself - [Fiona's Online Store](https://quinnf.pythonanywhere.com
 
 ![Online Store Demo](online-store-demo.gif)
 
-### Tools
-- Stripe API
-  - Stripe Checkout
-  - Stripe Retrieve Checkout
+| ### Tools                                            | ### Features                                                          |
+--------------------------------------------------------------------------------------------------------------------------------
+- Stripe API                                           |
+  - Stripe Checkout                                    |
+  - Stripe Retrieve Checkout                           |
   - Stripe Webhooks
-    - checkout.session.async_payment_failed
+    - checkout.session.async_payment_failed            |
     - checkout.session.async_payment_succeeded
     - checkout.session.completed
     - checkout.session.expired  
@@ -29,7 +30,7 @@ Try the site yourself - [Fiona's Online Store](https://quinnf.pythonanywhere.com
   - Bash 
   - Database Backup
 
-### Features
+
 - Checkout with Stripe
 - Checkout success page with detailed order summary
 - Product info page with Bootsrap image carousel
