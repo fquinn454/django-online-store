@@ -6,17 +6,21 @@ Try the site yourself - [Fiona's Online Store](https://quinnf.pythonanywhere.com
 
 | Tools | Features |
 | --- | --- | 
-| Stripe API <br><br>  Stripe Checkout <br><br>  Stripe Retrieve Checkout <br><br>  Stripe Webhooks<br> - checkout.session.async_payment_failed<br> - checkout.session.async_payment_succeeded<br>- checkout.session.completed<br>- checkout.session.expired<br><br>Django <br>- Models<br> - Views <br>- Templates<br><br> Python <br><br>  HTML5 <br><br>  CSS3 <br><br>  Bootstrap5 <br><br>  JavaScript <br><br>  MySQL <br><br>  Django Icons <br><br>  Python Anywhere <br>  - Web hosting <br> - Bash <br> - Database Backup | | 
+| Stripe API <br><br>  Stripe Checkout <br><br>  Stripe Retrieve Checkout <br><br>  Stripe Webhooks<br> - checkout.session.async_payment_failed<br> - checkout.session.async_payment_succeeded<br>- checkout.session.completed<br>- checkout.session.expired<br><br>Django <br>- Models<br> - Views <br>- Templates<br><br> Python <br><br>  HTML5 <br><br>  CSS3 <br><br>  Bootstrap5 <br><br>  JavaScript <br><br>  MySQL <br><br>  Django Icons <br><br>  Python Anywhere <br>  - Web hosting <br> - Bash <br> - Database Backup | Checkout with Stripe<br>Checkout success page with detailed order summary<br>Product info page with Bootsrap image carousel<br>Breadcrumbs<br>Landing Page<br>Product Catalogue<br>|
+
+
+
+| 
 
 Try the site yourself - [Fiona's Online Store](https://quinnf.pythonanywhere.com/)
 
 
-Checkout with Stripe |
-Checkout success page with detailed order summary |
-Product info page with Bootsrap image carousel |
-Breadcrumbs |
-Landing Page |
-Product Catalogue |
+
+
+
+
+
+
 Product Catalogue filtering by category and brand |
 Wishlist <br>(Add item, Delete item, Clear all items) |
 Shopping Cart <br>(Add item, Delete item, Increment quantity, Decrement quantity) |
