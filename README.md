@@ -1,6 +1,6 @@
 # django-online-store 
 
-[Fiona's Online Store](https://quinnf.pythonanywhere.com/)
+Try the site yourself - [Fiona's Online Store](https://quinnf.pythonanywhere.com/)
 ### Tools
 - Stripe API
   - Stripe Checkout
