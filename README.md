@@ -42,6 +42,6 @@
 - User Authentication
   - TODO - Allow user to change email, username and password 
 
-Try the site yourself - [Online Store Site](https://quinnf.pythonanywhere.com/)
+Try the site yourself - [Fiona's Online Store](https://quinnf.pythonanywhere.com/)
 
 ![Online Store Demo](online-store-demo.gif)
