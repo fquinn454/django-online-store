@@ -1,6 +1,9 @@
 # django-online-store 
 
+![Online Store Demo](online-store-demo.gif)
+
 Try the site yourself - [Fiona's Online Store](https://quinnf.pythonanywhere.com/)
+
 ### Tools
 - Stripe API
   - Stripe Checkout
@@ -19,10 +22,12 @@ Try the site yourself - [Fiona's Online Store](https://quinnf.pythonanywhere.com
 - CSS3
 - Bootstrap5
 - JavaScript
+- MySQL
 - Django Icons
 - Python Anywhere
   - Web hosting
   - Bash 
+  - Database Backup Task
 
 ### Features
 - Checkout with Stripe
@@ -46,4 +51,4 @@ Try the site yourself - [Fiona's Online Store](https://quinnf.pythonanywhere.com
 
 Try the site yourself - [Fiona's Online Store](https://quinnf.pythonanywhere.com/)
 
-![Online Store Demo](online-store-demo.gif)
+
