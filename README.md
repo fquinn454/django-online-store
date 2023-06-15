@@ -4,10 +4,10 @@ Try the site yourself - [Fiona's Online Store](https://quinnf.pythonanywhere.com
 
 ![Online Store Demo](online-store-demo.gif)
 
-| ### Tools                                            | ### Features                                                          |
---------------------------------------------------------------------------------------------------------------------------------
-- Stripe API                                           |
-  - Stripe Checkout                                    |
+| ### Tools | ### Features |
+ | --- | ---|
+| - Stripe API | - Checkout with Stripe |
+ | - Stripe Checkout |
   - Stripe Retrieve Checkout                           |
   - Stripe Webhooks
     - checkout.session.async_payment_failed            |
