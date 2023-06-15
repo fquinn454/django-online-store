@@ -4,12 +4,12 @@ Try the site yourself - [Fiona's Online Store](https://quinnf.pythonanywhere.com
 
 ![Online Store Demo](online-store-demo.gif)
 
-| Tools | | | |
-| --- | --- | --- | ---- |
-| Stripe API | Stripe Checkout | Stripe Retrieve Checkout | Stripe Webhooks<br> - checkout.session.async_payment_failed<br> - checkout.session.async_payment_succeeded<br> - checkout.session.completed<br> - checkout.session.expired<br> | 
-| Django <br> - Models<br> - Views <br> - Templates | Python | HTML5 | CSS3 | 
-| Bootstrap5 | JavaScript | MySQL | Django Icons | 
-| Python Anywhere <br> - Web hosting <br> - Bash <br> - Database Backup | | | |
+| Tools | Features |
+| --- | --- | 
+| Stripe API <br> Stripe Checkout <br> Stripe Retrieve Checkout <br> Stripe Webhooks<br> - checkout.session.async_payment_failed<br> - checkout.session.async_payment_succeeded<br> - checkout.session.completed<br> - checkout.session.expired<br> <br> 
+<br> Django <br> - Models<br> - Views <br> - Templates | Python | HTML5 | CSS3 | 
+<br> Bootstrap5 <br> JavaScript <br> MySQL <br> Django Icons <br>
+<br> Python Anywhere <br> - Web hosting <br> - Bash <br> - Database Backup | | 
 
 Try the site yourself - [Fiona's Online Store](https://quinnf.pythonanywhere.com/)
 
