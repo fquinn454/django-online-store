@@ -40,4 +40,5 @@
   - TODO - Allow user to change email, username and password 
 
 Try the site yourself - [Online Store Site](https://quinnf.pythonanywhere.com/)
+
 ![Online Store Demo](online-store-demo.gif)
