@@ -27,7 +27,7 @@ Try the site yourself - [Fiona's Online Store](https://quinnf.pythonanywhere.com
 - Python Anywhere
   - Web hosting
   - Bash 
-  - Database Backup Task
+  - Database Backup
 
 ### Features
 - Checkout with Stripe
