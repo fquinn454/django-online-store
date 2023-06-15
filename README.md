@@ -10,17 +10,17 @@ Try the site yourself - [Fiona's Online Store](https://quinnf.pythonanywhere.com
  | - Stripe Checkout |
   | - Stripe Retrieve Checkout |
    |- Stripe Webhooks |
-     | - checkout.session.async_payment_failed |            
-     | - checkout.session.async_payment_succeeded |
-    - checkout.session.completed |
-    - checkout.session.expired | 
-- Django |
-  - Models |
-  - Views
-  - Templates
-- Python
-- HTML5
-- CSS3
+      - checkout.session.async_payment_failed             
+      - checkout.session.async_payment_succeeded 
+      - checkout.session.completed 
+      - checkout.session.expired 
+| - Django |
+    - Models 
+    - Views
+    - Templates
+| - Python |
+| - HTML5 |
+| - CSS3 |
 - Bootstrap5
 - JavaScript
 - MySQL
