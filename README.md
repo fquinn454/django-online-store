@@ -18,6 +18,9 @@
 - Bootstrap5
 - JavaScript
 - Django Icons
+- Python Anywhere
+  - Web hosting
+  - Bash 
 
 ### Features
 - Checkout with Stripe
