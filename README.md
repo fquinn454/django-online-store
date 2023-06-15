@@ -1,6 +1,7 @@
 # Online Store
 
 Try the site yourself - [Fiona's Online Store](https://quinnf.pythonanywhere.com/)
+
 ![Online Store Demo](online-store-demo.gif)
 
 ### Tools
