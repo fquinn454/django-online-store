@@ -14,7 +14,7 @@ Try the site yourself - [Fiona's Online Store](https://quinnf.pythonanywhere.com
 | Python | Product Catalogue |
 | HTML5 | Product Catalogue filtering by category and brand |
 | CSS3 | Wishlist <br>(Add item, Delete item, Clear all items) |
-| Bootstrap5 | Shopping Cart <br>(Add item, Delete item, Increment item quantity, Decrement item quantity) |
+| Bootstrap5 | Shopping Cart <br>(Add item, Delete item, Increment quantity, Decrement quantity) |
 | JavaScript | Tracks product stock and won't sell items when stock has run out
 | MySQL | Responsive design throughout<br> - Grid<br> - Flexbox |
 | Django Icons | Account section with <br> - Every order made by user previously<br> - Every address used by user previously
