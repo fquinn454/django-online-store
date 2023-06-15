@@ -30,6 +30,9 @@
 - Wishlist (Add item, Delete item, Clear all items)
 - Shopping Cart (Add item, Delete item, Increment item quantity, Decrement item quantity)
 - Tracks product stock and won't sell items when stock has run out
+- Responsive design throughout
+  - Grid
+  - Flexbox
 - Account section with 
   - Every order made by user previously
   - Every address used by user previously
