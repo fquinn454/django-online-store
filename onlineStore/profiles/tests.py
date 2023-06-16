@@ -41,11 +41,10 @@ class ProfileTestCase(TestCase):
 
     def test_addProductToWishlist(self):
         request = self.factory.post('/addFavourite', {'product_id': '1'})
-        request.session['wishlist'] = []
-        request.save()
+
         middleware = SessionMiddleware(request)
         middleware.process_request(request)
-
+        request.session = {'wishlist':[]}
 
         self.assertEqual(request.session['wishlist'], '1')
 
