@@ -40,12 +40,11 @@ class ProfileTestCase(TestCase):
 
 
     def test_addProductToWishlist(self):
-        request = self.factory.post('/addFavourite', {'product_id': '1'})
-
+        request = self.factory.post('/addFavourite', {'wishlist': []})
         middleware = SessionMiddleware(request)
         middleware.process_request(request)
-        request.session = {'wishlist':[]}
-
-        self.assertEqual(request.session['wishlist'], '1')
+        request.user = AnonymousUser()
+        Profile.addProductToWishlist(request, '1')
+        self.assertEqual(request.session['wishlist'], ['1'])
 
         #add to autheniticated user's wishlist
