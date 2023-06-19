@@ -14,11 +14,12 @@ class ProfileTestCase(TestCase):
         self.user1.save()
         self.client = Client()
         self.factory = RequestFactory()
-        self.product_1 = Product.objects.create(id=1, title='test_product1', description='A great phone ....', price=159.99, stock=3, rating=4.3, discount=3.5)
-        self.product_3 = Product.objects.create(id=3, title='test_product3', description='A great tablet ....', price=359.99, stock=4, rating=4.25, discount=4.5)
-        self.product_5 = Product.objects.create(id=5, title='test_product5', description='A great laptop ....', price=899.99, stock=4.5, rating=3.96, discount=6.5)
+        self.product_1 = Product.objects.create(id=1, title='test_product1', description='A great phone ....', price=160, stock=3, rating=4.3, discount=3.5)
+        self.product_3 = Product.objects.create(id=3, title='test_product3', description='A great tablet ....', price=360, stock=4, rating=4.25, discount=4.5)
+        self.product_5 = Product.objects.create(id=5, title='test_product5', description='A great laptop ....', price=900, stock=4.5, rating=3.96, discount=6.5)
         self.productset_1 = ProductSet.objects.create(user = self.user1, product = self.product_1, quantity = 3)
         self.productset_3 = ProductSet.objects.create(user = self.user1, product = self.product_3, quantity = 2)
+        self.productset_5 = ProductSet.objects.create(user = self.user1, product = self.product_5, quantity = 4)
 
     def test_profile_created_automatically(self):
         # check profile is automatically created when user is created
@@ -174,8 +175,8 @@ class ProfileTestCase(TestCase):
         self.assertEqual(str(self.productset_3), 'test_product3 x 2' )
 
     def test_getTotalCost(self):
-        self.assertEqual(self.productset_1.getTotalCost(), 479.97)
-        self.assertEqual(self.productset_3.getTotalCost(), 719.98)
+        self.assertEqual(self.productset_1.getTotalCost(), 480 )
+        self.assertEqual(self.productset_3.getTotalCost(), 720)
 
     def test_getCartItems(self):
         request = self.factory.get('showcart', {'cart': []})
@@ -192,3 +193,21 @@ class ProfileTestCase(TestCase):
         ProductSet.removeProductFromCart(request, 1)
         productsets = ProductSet.getCartItems(request)
         self.assertEqual(set(productsets), set([self.productset_3]))
+
+    def test_SumCart(self):
+        request = self.factory.get('showcart', {'cart': []})
+        # For authenticated user
+        middleware = SessionMiddleware(request)
+        middleware.process_request(request)
+        request.user = AnonymousUser()
+        request.session['cart'] = [3, 5]
+        self.assertEqual(ProductSet.sumCart(request), 1260)
+        request = self.factory.get('showcart', {'cart': []})
+        # For authenticated user
+        middleware = SessionMiddleware(request)
+        middleware.process_request(request)
+        request.user = self.user1
+        profile = Profile.objects.get(user = request.user)
+        profile.cart.add(self.productset_1)
+        profile.cart.add(self.productset_5)
+        self.assertEqual(ProductSet.sumCart(request), 4080)
