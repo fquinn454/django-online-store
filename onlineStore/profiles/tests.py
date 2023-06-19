@@ -2,10 +2,10 @@ from django.test import TestCase
 from django.test import Client, RequestFactory
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.contrib.auth.models import User, AnonymousUser
-from .models import Profile
+from .models import Profile, ProductSet
 from store.models import Product
 
-
+# TESTS FOR PROFILE
 class ProfileTestCase(TestCase):
     def setUp(self):
         User.objects.create(username="testuser1")
@@ -17,7 +17,8 @@ class ProfileTestCase(TestCase):
         self.product_1 = Product.objects.create(id=1, title='test_product1', description='A great phone ....', price=159.99, stock=3, rating=4.3, discount=3.5)
         self.product_3 = Product.objects.create(id=3, title='test_product3', description='A great tablet ....', price=359.99, stock=4, rating=4.25, discount=4.5)
         self.product_5 = Product.objects.create(id=5, title='test_product5', description='A great laptop ....', price=899.99, stock=4.5, rating=3.96, discount=6.5)
-
+        self.productset_1 = ProductSet.objects.create(user = self.user1, product = self.product_1, quantity = 3)
+        self.productset_3 = ProductSet.objects.create(user = self.user1, product = self.product_3, quantity = 2)
 
     def test_profile_created_automatically(self):
         # check profile is automatically created when user is created
@@ -166,3 +167,28 @@ class ProfileTestCase(TestCase):
         profile = Profile.objects.get(user = request.user)
         Profile.deleteWishList(request)
         self.assertEqual(set(profile.wishlist.all()), set([]))
+
+    # TESTS FOR PRODUCTSETS
+    def test_String_Productset(self):
+        self.assertEqual(str(self.productset_1), 'test_product1 x 3' )
+        self.assertEqual(str(self.productset_3), 'test_product3 x 2' )
+
+    def test_getTotalCost(self):
+        self.assertEqual(self.productset_1.getTotalCost(), 479.97)
+        self.assertEqual(self.productset_3.getTotalCost(), 719.98)
+
+    def test_getCartItems(self):
+        request = self.factory.get('showcart', {'cart': []})
+        # For authenticated user
+        request.user = self.user1
+        middleware = SessionMiddleware(request)
+        middleware.process_request(request)
+        # Add item to cart
+        ProductSet.addProductToCart(request, 1)
+        ProductSet.addProductToCart(request, 3)
+        productsets = ProductSet.getCartItems(request)
+        self.assertEqual(set(productsets), set([self.productset_1, self.productset_3]))
+        # Remove item from cart
+        ProductSet.removeProductFromCart(request, 1)
+        productsets = ProductSet.getCartItems(request)
+        self.assertEqual(set(productsets), set([self.productset_3]))

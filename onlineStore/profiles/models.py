@@ -28,19 +28,6 @@ class ProductSet(models.Model):
             profile = Profile.objects.get(user = request.user)
             productsets = profile.cart.all()
             return productsets
-        else:
-            cart = request.session.get('cart', [])
-            productsets = []
-            if cart:
-                for item in cart:
-                    product = Product.objects.get(id = item)
-                    productset = {'product': product, 'quantity': item[1] }
-                    cost = product.price * item[1]
-                    productset['getTotalCost'] = cost
-                    productsets.append(productset)
-                return productsets
-            else:
-                return productsets
 
     # Adds product to user cart
     def addProductToCart(request, product_id):
