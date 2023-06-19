@@ -14,9 +14,10 @@ class ProfileTestCase(TestCase):
         self.user1.save()
         self.client = Client()
         self.factory = RequestFactory()
-        self.product_1 = Product.objects.create(id=1, title='test_product1', description='A great phone ....', price=160, stock=3, rating=4.3, discount=3.5)
+        self.product_1 = Product.objects.create(id=1, title='test_product1', description='A great phone ....', price=160, stock=5, rating=4.3, discount=3.5)
         self.product_3 = Product.objects.create(id=3, title='test_product3', description='A great tablet ....', price=360, stock=4, rating=4.25, discount=4.5)
-        self.product_5 = Product.objects.create(id=5, title='test_product5', description='A great laptop ....', price=900, stock=4.5, rating=3.96, discount=6.5)
+        self.product_5 = Product.objects.create(id=5, title='test_product5', description='A great laptop ....', price=900, stock=5, rating=3.96, discount=6.5)
+        self.product_2 = Product.objects.create(id=2, title='test_product2', description='Another great phone ....', price=420, stock=5, rating=4.0, discount=3.8)
         self.productset_1 = ProductSet.objects.create(user = self.user1, product = self.product_1, quantity = 3)
         self.productset_3 = ProductSet.objects.create(user = self.user1, product = self.product_3, quantity = 2)
         self.productset_5 = ProductSet.objects.create(user = self.user1, product = self.product_5, quantity = 4)
@@ -180,7 +181,7 @@ class ProfileTestCase(TestCase):
 
     def test_getCartItems(self):
         request = self.factory.get('showcart', {'cart': []})
-        # For authenticated user
+        # Only authenticated users
         request.user = self.user1
         middleware = SessionMiddleware(request)
         middleware.process_request(request)
@@ -193,6 +194,25 @@ class ProfileTestCase(TestCase):
         ProductSet.removeProductFromCart(request, 1)
         productsets = ProductSet.getCartItems(request)
         self.assertEqual(set(productsets), set([self.productset_3]))
+
+    def test_addProductToCart(self):
+        request = self.factory.get('showcart', {'cart': []})
+        middleware = SessionMiddleware(request)
+        middleware.process_request(request)
+        request.user = self.user1
+        ProductSet.addProductToCart(request, 2)
+        profile = Profile.objects.get(user= request.user)
+        productset_1 = ProductSet.objects.get(user = request.user, product=2)
+        productset_2 = profile.cart.all()[0]
+        self.assertEqual(productset_1, productset_2)
+        request = self.factory.get('showcart', {'cart': []})
+        middleware = SessionMiddleware(request)
+        middleware.process_request(request)
+        request.user = AnonymousUser()
+        # items already in cart
+        request.session['cart'] = [1]
+        ProductSet.addProductToCart(request, 3)
+        self.assertEqual(set(request.session['cart']), set([1, 3]))
 
     def test_SumCart(self):
         request = self.factory.get('showcart', {'cart': []})
@@ -211,3 +231,59 @@ class ProfileTestCase(TestCase):
         profile.cart.add(self.productset_1)
         profile.cart.add(self.productset_5)
         self.assertEqual(ProductSet.sumCart(request), 4080)
+
+    def test_increment(self):
+        request = self.factory.post('showcart', {'cart': []})
+        # Only authenticated users
+        middleware = SessionMiddleware(request)
+        middleware.process_request(request)
+        request.user = self.user1
+        profile = Profile.objects.get(user = request.user)
+        profile.cart.add(self.productset_1)
+        # Increment item in cart
+        ProductSet.increment(request, 1)
+        productsets = profile.cart.all()
+        productset = productsets.get(product = self.product_1)
+        self.assertEqual(productset.quantity, 4)
+        self.assertFalse(productset.message)
+        # Message True means we have reached stock limit - warning given
+        ProductSet.increment(request, 1)
+        productsets = profile.cart.all()
+        productset = productsets.get(product = self.product_1)
+        self.assertEqual(productset.quantity, 5)
+        self.assertTrue(productset.message)
+        ProductSet.increment(request, 1)
+        productsets = profile.cart.all()
+        productset = productsets.get(product = self.product_1)
+        # Do not increment over stock limit
+        self.assertEqual(productset.quantity, 5)
+        self.assertTrue(productset.message)
+
+    def test_decrement(self):
+        request = self.factory.post('showcart', {'cart': []})
+        # Only authenticated users
+        middleware = SessionMiddleware(request)
+        middleware.process_request(request)
+        request.user = self.user1
+        profile = Profile.objects.get(user = request.user)
+        profile.cart.add(self.productset_1)
+        productsets = profile.cart.all()
+        ProductSet.decrement(request, 1)
+        productsets = profile.cart.all()
+        productset = productsets.get(product = self.product_1)
+        self.assertEqual(productset.quantity, 2)
+        self.assertFalse(productset.message)
+        ProductSet.decrement(request, 1)
+        productsets = profile.cart.all()
+        productset = productsets.get(product = self.product_1)
+        self.assertEqual(productset.quantity, 1)
+        self.assertFalse(productset.message)
+        ProductSet.decrement(request, 1)
+        # Doesn't decrement lower than 1
+        productsets = profile.cart.all()
+        productset = productsets.get(product = self.product_1)
+        self.assertEqual(productset.quantity, 1)
+        self.assertFalse(productset.message)
+
+
+
