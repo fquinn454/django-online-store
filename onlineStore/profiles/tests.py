@@ -4,9 +4,13 @@ from django.contrib.sessions.middleware import SessionMiddleware
 from django.contrib.auth.models import User, AnonymousUser
 from .models import Profile, ProductSet
 from store.models import Product
+from django.urls import reverse
+from .forms import RegisterForm
 
-# TESTS FOR PROFILE
+# Test for profiles.models.py
+# Tests for Profile Class
 class ProfileTestCase(TestCase):
+
     def setUp(self):
         User.objects.create(username="testuser1")
         self.user1 = User.objects.get(username="testuser1")
@@ -180,7 +184,7 @@ class ProfileTestCase(TestCase):
         Profile.deleteWishList(request)
         self.assertEqual(set(profile.wishlist.all()), set([]))
 
-    # TESTS FOR PRODUCTSETS
+    # Tests for ProductSet Class
     def test_String_Productset(self):
         self.assertEqual(str(self.productset_1), 'test_product1 x 3' )
         self.assertEqual(str(self.productset_3), 'test_product3 x 2' )
@@ -317,6 +321,49 @@ class ProfileTestCase(TestCase):
         productset = productsets.get(product = self.product_1)
         self.assertEqual(productset.quantity, 1)
         self.assertFalse(productset.message)
+
+    # Tests for profiles.views.py
+    def test_login_invalid_user(self):
+        response=self.client.get(reverse('login'), follow = True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "registration/login.html")
+
+    def test_login_valid_user(self):
+        response=self.client.post(reverse('login'), {'username': 'testuser1', 'password':'password123'}, follow = True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "showcart.html")
+
+
+    def test_register_empty_data(self):
+        user_data={
+
+        }
+        response=self.client.get(reverse('register'), user_data)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "register.html")
+
+    def test_register_invalid_data(self):
+        user_data={
+            'username': 'testuser3',
+            'email':'testuser3@gmail.com',
+            'password1':'password123',
+            'password2':'password213'
+        }
+        response=self.client.post(reverse('register'), user_data)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "register.html")
+
+    def test_form_valid(self):
+        user_data = {
+            'username': 'testuser',
+            'password1': 'testpassword',
+            'password2': 'testpassword',
+            'email': 'test@example.com',
+        }
+        response = self.client.post(reverse('register'), user_data)
+        self.assertRedirects(response, '/showcart')
+        self.assertEqual(response.status_code, 302)
+
 
 
 

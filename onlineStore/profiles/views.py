@@ -15,13 +15,13 @@ stripe.api_key = os.environ.get('STRIPE_SECRET_KEY')
 def register(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
-        context = {"form":form}
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect('showcart')
         else:
-            context['form'] = form
+            form = RegisterForm()
+            context = {"form": form}
     else:
         form = RegisterForm()
         context = {"form": form}
