@@ -63,7 +63,7 @@ class ProductSet(models.Model):
         else:
             cart = request.session.get('cart', [])
             for item in cart:
-                if item[0] == int(product_id):
+                if item == int(product_id):
                     cart.remove(item)
                     request.session['cart'] = cart
                     request.session.save()

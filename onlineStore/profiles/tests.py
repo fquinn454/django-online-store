@@ -106,7 +106,7 @@ class ProfileTestCase(TestCase):
         self.assertEqual(set(products), set([]))
 
         # Tests for Authenticated user
-        request = self.factory.get('/showWishList', {'wishlist': []})
+        request = self.factory.get('showWishList', {'session': {'wishlist': []}})
         request.user = self.user1
         middleware = SessionMiddleware(request)
         middleware.process_request(request)
@@ -118,6 +118,16 @@ class ProfileTestCase(TestCase):
         Profile.addProductToWishlist(request, 5 )
         products = Profile.getWishlistProducts(request)
         self.assertEqual(set(products), set([self.product_5]))
+        Profile.deleteWishList(request)
+        request = self.factory.get('showWishList', {'wishlist': []})
+        middleware = SessionMiddleware(request)
+        middleware.process_request(request)
+        request.user = self.user1
+        request.session['wishlist'] = [1, 3]
+        self.assertTrue(request.user.is_authenticated)
+        profile = Profile.objects.get(user = request.user)
+        products = Profile.getWishlistProducts(request)
+        self.assertEqual(set(products), set([self.product_1, self.product_3]))
 
     def test_removeProductFromWishlist(self):
         # Tests for anonymous user
@@ -213,6 +223,22 @@ class ProfileTestCase(TestCase):
         request.session['cart'] = [1]
         ProductSet.addProductToCart(request, 3)
         self.assertEqual(set(request.session['cart']), set([1, 3]))
+        request = self.factory.get('showcart', {'cart': []})
+        middleware = SessionMiddleware(request)
+        middleware.process_request(request)
+        request.user = AnonymousUser()
+        request.session['cart'] = []
+        ProductSet.addProductToCart(request, 1)
+        self.assertEqual(set(request.session['cart']), set([1]))
+
+    def test_removeItemFromCart(self):
+        request = self.factory.get('showcart', {'cart': []})
+        middleware = SessionMiddleware(request)
+        middleware.process_request(request)
+        request.user = AnonymousUser()
+        request.session['cart'] = [1, 3, 5, 7]
+        ProductSet.removeProductFromCart(request, 5)
+        self.assertEqual(set(request.session['cart']), set([1, 3, 7]))
 
     def test_SumCart(self):
         request = self.factory.get('showcart', {'cart': []})
@@ -231,6 +257,13 @@ class ProfileTestCase(TestCase):
         profile.cart.add(self.productset_1)
         profile.cart.add(self.productset_5)
         self.assertEqual(ProductSet.sumCart(request), 4080)
+        middleware = SessionMiddleware(request)
+        middleware.process_request(request)
+        request.user = self.user1
+        request.session['cart'] = [1, 5]
+        profile = Profile.objects.get(user = request.user)
+        # includes 1, 5 and £4080 from previous
+        self.assertEqual(ProductSet.sumCart(request), 5140)
 
     def test_increment(self):
         request = self.factory.post('showcart', {'cart': []})
