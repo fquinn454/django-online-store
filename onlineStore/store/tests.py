@@ -8,7 +8,7 @@ from address.models import Address
 from .models import Product
 from django.urls import reverse
 from profiles.views import accountInfo
-from .views import showWishList
+from .views import showWishList, addFavourite
 
 # Test for store.views.py
 class StoreTestCase(TestCase):
@@ -106,3 +106,12 @@ class StoreTestCase(TestCase):
         self.assertContains(response, '<p>test product 1 is a fantastic phone</p>')
         self.assertContains(response, '<p>test product 3 is a fantastic tablet</p>')
         self.assertNotContains(response, '<p>test product 2 is a fantastic laptop</p>')
+
+    def test_add_favourite_anon(self):
+        response = self.client.get(reverse('addFavourite', args=[3]))
+        self.assertTrue(response.status_code, 302)
+        response = self.client.get(reverse('addFavourite', args=[2]), follow=True)
+        self.assertTrue(response.status_code, 200)
+        self.assertContains(response, '<span class="badge">2</span></a>')
+
+
