@@ -3,9 +3,11 @@ from django.test import Client, RequestFactory
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.contrib.auth.models import User, AnonymousUser
 from .models import Profile, ProductSet
+from order.models import Order
+from address.models import Address
 from store.models import Product
 from django.urls import reverse
-from .forms import RegisterForm
+from .views import accountInfo
 
 # Test for profiles.models.py
 # Tests for Profile Class
@@ -16,6 +18,10 @@ class ProfileTestCase(TestCase):
         self.user1 = User.objects.get(username="testuser1")
         self.user1.set_password('password123')
         self.user1.save()
+        User.objects.create(username="testuser2")
+        self.user2 = User.objects.get(username="testuser2")
+        self.user2.set_password('password456')
+        self.user2.save()
         self.client = Client()
         self.factory = RequestFactory()
         self.product_1 = Product.objects.create(id=1, title='test_product1', description='A great phone ....', price=160, stock=5, rating=4.3, discount=3.5)
@@ -25,6 +31,22 @@ class ProfileTestCase(TestCase):
         self.productset_1 = ProductSet.objects.create(user = self.user1, product = self.product_1, quantity = 3)
         self.productset_3 = ProductSet.objects.create(user = self.user1, product = self.product_3, quantity = 2)
         self.productset_5 = ProductSet.objects.create(user = self.user1, product = self.product_5, quantity = 4)
+        self.address = Address.objects.create(
+            profile = Profile.objects.get(user=self.user1),
+            line1 = "144 Long Lane",
+            line2= "Aughton",
+            city = "Ormskirk",
+            postal_code = "L39 5DA"
+        )
+
+        self.order = Order.objects.create(
+            profile = Profile.objects.get(user=self.user1),
+            address = self.address,
+        )
+
+        productsets = [self.productset_1, self.productset_3]
+        self.order.productsets.set(productsets)
+
 
     def test_profile_created_automatically(self):
         # check profile is automatically created when user is created
@@ -364,6 +386,33 @@ class ProfileTestCase(TestCase):
         self.assertRedirects(response, '/showcart')
         self.assertEqual(response.status_code, 302)
 
+    def test_get_Account_Info_LoggedIn(self):
+        self.client.login(username="testuser1", password="password123")
+        response = self.client.post(reverse('account-info'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "account-info.html")
+        self.assertContains(response, "144 Long Lane")
 
+    def test_get_Account_Info_LoggedIn_asUser2(self):
+        self.client.force_login(self.user2)
+        response = self.client.post(reverse('account-info'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "account-info.html")
+        self.assertContains(response, '<p><strong>Username:</strong>testuser2</p>')
+
+
+    def test_get_Account_Info_Not_Logged_In(self):
+        response = self.client.post(reverse('account-info'))
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/login')
+
+
+    def test_noAddress_noOrders(self):
+        request = self.factory.post('account-info')
+        middleware = SessionMiddleware(request)
+        middleware.process_request(request)
+        request.user = self.user2
+        response = accountInfo(request)
+        self.assertEqual(response.status_code, 200)
 
 
